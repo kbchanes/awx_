@@ -1,0 +1,7 @@
+---
+- name: Display hello world!
+  hosts: all
+  tasks:
+  - name: hello world!
+    debug:
+      msg: hello world! This is AWX!
