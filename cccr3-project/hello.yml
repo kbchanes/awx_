@@ -1,5 +1,6 @@
 ---
 - name: Display hello world!
+  become: yes
   hosts: all
   tasks:
   - name: hello world!
