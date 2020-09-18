@@ -1,6 +1,6 @@
 ---
 - name: Display hello world!
-  hosts: node1
+  hosts: all
   tasks:
   - name: hello world!
     debug:
