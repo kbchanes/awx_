@@ -1,8 +1,20 @@
 ---
-- name: Display hello world!
+- name: Job for Bastion
   become: yes
-  hosts: all
+  hosts: controller
   tasks:
-  - name: hello world!
-    debug:
-      msg: hello world! This is AWX!
+  - name: Bastion replace DNS
+    replace:
+      path: /etc/named.conf
+      regexp: 127.0.0.1;
+      replace: any;
+
+    replace:
+      path: /etc/named.conf
+      regexp: ::1;
+      replace: any;
+
+    replace:
+      path: /etc/named.conf
+      regexp: localhost;
+      replace: any;
