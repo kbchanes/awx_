@@ -16,5 +16,5 @@
   - name: Bastion replace DNS3
     replace:
       path: /etc/named.conf
-      regexp:         allow-query     { any; };
+      regexp:         allow-query     { localhost; };
       replace:         allow-query     { any; };
