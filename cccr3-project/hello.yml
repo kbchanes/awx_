@@ -9,9 +9,9 @@
       regexp: "{{ item.regexp }}"
       replace: "{{ item.replace }}"
     with_items:
-      - { regexp: '        listen-on port 53 { 127.0.0.1; };', replace: '        listen-on port 53 { any; };' }
-      - { regexp: '        listen-on-v6 port 53 { ::1; };', replace: '        listen-on-v6 port 53 { any; }; }
-      - { regexp: '        allow-query     { localhost; };', replace: '        allow-query     { any; };' }
+      - { regexp: "        listen-on port 53 { 127.0.0.1; };", replace: "        listen-on port 53 { any; };" }
+      - { regexp: "        listen-on-v6 port 53 { ::1; };", replace: "        listen-on-v6 port 53 { any; };" }
+      - { regexp: "        allow-query     { localhost; };", replace: "        allow-query     { any; };" }
   
   - name: Bastion replace DNS2
     lineinfile:
