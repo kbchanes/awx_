@@ -3,18 +3,18 @@
   become: yes
   hosts: controller
   tasks:
-  - name: Bastion replace DNS
+  - name: Bastion replace DNS1
     replace:
       path: /etc/named.conf
       regexp:         listen-on port 53 { 127.0.0.1; };
       replace:         listen-on port 53 { any; };
-
+  - name: Bastion replace DNS2
     replace:
       path: /etc/named.conf
       regexp:         listen-on-v6 port 53 { ::1; };
       replace:         listen-on-v6 port 53 { any };
-
+  - name: Bastion replace DNS3
     replace:
       path: /etc/named.conf
       regexp:         allow-query     { any; };
-      replace: any;
+      replace:         allow-query     { any; };
