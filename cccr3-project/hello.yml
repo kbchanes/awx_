@@ -6,7 +6,8 @@
     replace:
       path: /etc/named.conf
       regexp: "{{ item.regexp }}"
-      replace: "{{ item.replace }}"
+      before: "{{ item.before }}"
+      after: "{{ item.after }}"
     with_items:
       - { regexp: " listen-on port 53 { 127.0.0.1; };", before: "127.0.0.1", after: "any" }
       - { regexp: " listen-on-v6 port 53 { ::1; };", before: "::1", after: "any" }
