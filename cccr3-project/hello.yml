@@ -6,12 +6,12 @@
   - name: Bastion replace DNS
     replace:
       path: /etc/named.conf
-      regexp: 127.0.0.1;
+      regexp: listen-on port 53 { 127.0.0.1; };
       replace: any;
 
     replace:
       path: /etc/named.conf
-      regexp: ::1;
+      regexp: listen-on-v6 port 53 { ::1; };
       replace: any;
 
     replace:
