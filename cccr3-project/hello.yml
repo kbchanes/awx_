@@ -18,11 +18,11 @@
       path: /etc/named.rfc1912.zones
       line: "{{ item.line2 }}"
     with_items:
-      - { line2: 'zone "cccr3team.com" IN {' }
-      - { line2: '        type master;' }
-      - { line2: '        file "cccr3team.com.zone";' }
-      - { line2: '        allow-update { none; };' }
-      - { line2: '};' }
+      - { line2: "zone "cccr3team.com" IN {" }
+      - { line2: "        type master;" }
+      - { line2: "        file "cccr3team.com.zone";" }
+      - { line2: "        allow-update { none; };" }
+      - { line2: "};" }
 
   - name: Bastion replace DNS3
     lineinfile:
@@ -75,11 +75,11 @@
   - name: OKD replace DNS1
     lineinfile:
       path: /etc/sysconfig/network-scripts/ifcfg-eth0
-      line: "{{ item.line1 }}"
+      line: "{{ item.line4 }}"
     with_item:
-      - { line1: "NM_CONTROLLED=yes" }
-      - { line1: "PEERDNS=yes" }
-      - { line1: "DNS1=192.168.122.3" }
+      - { line4: "NM_CONTROLLED=yes" }
+      - { line4: "PEERDNS=yes" }
+      - { line4: "DNS1=192.168.122.3" }
   
   - name: Restart NetworkManager
     service:
@@ -90,6 +90,3 @@
     lineinfile:
       path: /etc/sysctl.conf
       line: net.ipv4.ip_forward=1
-  
-  
-    
