@@ -68,7 +68,6 @@
       name: NetworkManager
       state: restarted
 
----
 - name: OKD Master
   become: yes
   hosts: okd1
