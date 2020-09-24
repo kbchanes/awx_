@@ -1,6 +1,6 @@
 - name: Job for Bastion
   become: yes
-  hosts: localhost
+  hosts: awx
   tasks:
   - name: Bastion replace DNS1
     replace:
