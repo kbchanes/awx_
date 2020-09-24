@@ -1,6 +1,6 @@
 - name: Job for Bastion
   become: yes
-  hosts: controller
+  hosts: localhost
   tasks:
   - name: Bastion replace DNS1
     replace:
