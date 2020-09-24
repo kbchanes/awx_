@@ -1,1 +1,19 @@
-
+---
+- name: Job for Bastion
+  hosts: controller
+  tasks:
+  - name: Bastion replace DNS
+    replace:
+      path: /etc/named.conf
+      regexp: 127.0.0.1;
+      replace: any;
+      
+    replace:
+      path: /etc/named.conf
+      regexp: ::1;
+      replace: any;
+    
+    replace:
+      path: /etc/named.conf
+      regexp: localhost;
+      replace: any;
