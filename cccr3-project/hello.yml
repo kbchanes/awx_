@@ -6,9 +6,20 @@
   - name: Bastion replace DNS1
     replace:
       path: /etc/named.conf
-      regexp: "{{ item.regexp }}"
-      replace: "{{ item.replace }}"
-    with_items:
-      - { regexp: "^        listen-on port 53 ", replace: "        listen-on port 53 { any; };" }
-      - { regexp: "^        listen-on-v6 port 53 ", replace: "        listen-on-v6 port 53 { any; };" }
-      - { regexp: "^        allow-query ", replace: "        allow-query  { any; };" }
+      regexp: "^        listen-on port 53 "
+      replace: "        listen-on port 53 { any; };"
+    replace:
+      path: /etc/named.conf
+      regexp: "^        listen-on-v6 port 53 "
+      replace: "        listen-on-v6 port 53 { any; };"
+    replace:
+      path: /etc/named.conf
+      regexp: "^        allow-query "
+      replace: "        allow-query  { any; };"
+      
+      
+      
+#    with_items:
+#      - { regexp: "^        listen-on port 53 ", replace: "        listen-on port 53 { any; };" }
+#      - { regexp: "^        listen-on-v6 port 53 ", replace: "        listen-on-v6 port 53 { any; };" }
+#      - { regexp: "^        allow-query ", replace: "        allow-query  { any; };" }
