@@ -9,6 +9,6 @@
       regexp: "{{ item.regexp }}"
       line: "{{ item.line }}"
     with_items:
-      - { regexp: "^listen-on port 53 ", line: "listen-on port 53 { any; };" }
-      - { regexp: "^listen-on-v6 port 53 ", line: "listen-on-v6 port 53 { any; };" }
-      - { regexp: "^allow-query ", line: "allow-query  { any; };" }
+      - { regexp: "^        listen-on port 53 ", line: "        listen-on port 53 { any; };" }
+      - { regexp: "^        listen-on-v6 port 53 ", line: "        listen-on-v6 port 53 { any; };" }
+      - { regexp: "^        allow-query ", line: "        allow-query  { any; };" }
