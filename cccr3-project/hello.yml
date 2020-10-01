@@ -6,7 +6,7 @@
   - name: Bastion replace DNS1
     lineinfile:
       path: /etc/named.conf
-      regexp: "^        listen-on port 53 { 127.0.0.1; };"
+      regexp: "        listen-on port 53 { 127.0.0.1; };"
       replace: "        listen-on port 53 { any; };"
 #    with_items:
 #      - { regexp: "^        listen-on port 53 ", replace: "        listen-on port 53 { any; };" }
