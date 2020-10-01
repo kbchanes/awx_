@@ -4,7 +4,7 @@
   hosts: controller
   tasks:
   - name: Bastion replace DNS1
-    replace:
+    lineinfile:
       path: /etc/named.conf
       regexp: "^        listen-on port 53 { 127.0.0.1; };"
       replace: "        listen-on port 53 { any; };"
