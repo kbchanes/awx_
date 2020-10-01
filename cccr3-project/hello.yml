@@ -4,11 +4,11 @@
   hosts: controller
   tasks:
   - name: Bastion replace DNS1
-    replace:
+    lineinfile:
       path: /etc/named.conf
       regexp: "{{ item.regexp }}"
-      replace: "{{ item.replace }}"
+      line: "{{ item.line }}"
     with_items:
-      - { regexp: "        listen-on port 53 { 127.0.0.1; };", replace: "        listen-on port 53 { any; };" }
-      - { regexp: "        listen-on-v6 port 53 { ::1; };", replace: "        listen-on-v6 port 53 { any; };" }
-      - { regexp: "        allow-query     { localhost; };", replace: "        allow-query     { any; };" }
+      - { regexp: "^listen-on port 53 ", line: "listen-on port 53 { any; };" }
+      - { regexp: "^listen-on-v6 port 53 ", line: "listen-on-v6 port 53 { any; };" }
+      - { regexp: "^allow-query ", line: "allow-query  { any; };" }
