@@ -69,12 +69,16 @@
     service:
       name: NetworkManager
       state: restarted
-    
-#   - name: Bastion replace DNS3
-#     lineinfile:
-#       path: /etc/sysconfig/network-scripts/ifcfg-eth0
-#       line: DNS1=192.168.122.3
 
+  - name: SSH-Keygen
+    command: "ssh-keygen"
+
+  - name: SSH-Key Copy
+    authorized_key:
+      user: student
+      state: present
+      key: "{{ lookup('file', '/home/student/.ssh/id_rsa.pub') }}"
+    
 
 - name: Master
   become: yes
@@ -93,3 +97,8 @@
     service:
       name: NetworkManager
       state: restarted
+
+  - name: Add sysctl.conf
+    lineinfile:
+      path: /etc/sysctl.conf
+      line: "net.ipv4.ip_forward=1"
