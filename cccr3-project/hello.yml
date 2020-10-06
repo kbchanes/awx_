@@ -53,6 +53,6 @@
       port: "{{ item }}"
       permanent: yes
       state: enabled
-    with_item:
+    with_items:
       - "53/tcp"
       - "53/udp"
