@@ -42,17 +42,17 @@
       - "* IN A 192.168.122.244"
       - "okd IN A 192.168.122.244"
       
-    - name: Start to Named Service
-      service:
-        name: named
-        state: started
-        enabled: yes
+  - name: Start to Named Service
+    service:
+      name: named
+      state: started
+      enabled: yes
         
-    - name: 53 Port enabled
-      firewalld:
-        port: "{{ item }}"
-        permanent: yes
-        state: enabled
-      with_item:
-        - "53/tcp"
-        - "53/udp"
+  - name: 53 Port enabled
+    firewalld:
+      port: "{{ item }}"
+      permanent: yes
+      state: enabled
+    with_item:
+      - "53/tcp"
+      - "53/udp"
