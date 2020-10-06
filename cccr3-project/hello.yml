@@ -12,3 +12,14 @@
       - { regexp: "({ 127.0.0.1; };)$", replace: "{ any; };" }
       - { regexp: "({ ::1; };)$", replace: "{ any; };" }
       - { regexp: "({ localhost; };)$", replace: "{ any; };" }
+      
+  - name: Bastion replace DNS2
+    lineinfile:
+      path: /etc/named.rfc1912.zones
+      line: "item"
+    with_items:
+      - "zone \"cccr3.com\" IN {"
+      - "        type master;"
+      - "        file \"cccr3.com.zone\";"
+      - "        allow-update { none; };"
+      - "};"
