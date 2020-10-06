@@ -23,3 +23,6 @@
       - "        file \"cccr3.com.zone\";"
       - "        allow-update { none; };"
       - "}; "
+
+  - name: Create file cccr3.com.zone
+    
