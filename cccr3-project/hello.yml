@@ -60,10 +60,11 @@
 
   - name: Setting to DNS
     nmcli:
-      state: present
+      ifname: eth0
+      type: ethernet
       conn_name: eth0
-      dns4:
-      - 192.168.122.3
+      dns4: 192.168.122.3
+      state: present
     
   - name: Start to NetworkManager Service
     service:
