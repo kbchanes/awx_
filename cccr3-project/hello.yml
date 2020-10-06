@@ -24,9 +24,9 @@
       - "        allow-update { none; };"
       - "}; "
 
-  - name: Create file cccr3.com.zone
+  - name: Create zone file
     lineinfile:
-      path: /var/named/cccr3.com.zone
+      path: /var/named/cccr3\.com\.zone
       create: yes
       line: "{{ item }}"
     with_item:
