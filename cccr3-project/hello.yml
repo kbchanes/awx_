@@ -22,4 +22,4 @@
       - "        type master;"
       - "        file \"cccr3.com.zone\";"
       - "        allow-update { none; };"
-      - "};"
+      - "\};"
