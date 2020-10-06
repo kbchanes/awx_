@@ -29,7 +29,7 @@
       path: /var/named/cccr3.com.zone
       create: yes
       line: "{{ item }}"
-    with_item:
+    with_items:
       - "$TTL 3H"
       - "@ IN SOA ns.cccr3.com. root.cccr3.com. ( "
       - " 0 ; serial"
