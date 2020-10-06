@@ -11,4 +11,4 @@
     with_items:
       - { regexp: "({ 127.0.0.1; };)$", replace: "{ any; };" }
       - { regexp: "({ ::1; };)$", replace: "{ any; };" }
-      - { regexp: "({ 127.0.0.1; };)$", replace: "{ any; };" }
+      - { regexp: "({ localhost; };)$", replace: "{ any; };" }
