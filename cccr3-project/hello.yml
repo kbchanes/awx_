@@ -3,7 +3,7 @@
   become: yes
   hosts: controller
   tasks:
-  - name: Bastionreplace DNS1
+  - name: Bastion replace DNS1
     replace:
       path: /etc/named.conf
       regexp: "{{ item.regexp }}"
@@ -57,3 +57,20 @@
     with_items:
       - "53/tcp"
       - "53/udp"
+
+  - name: Setting to DNS
+    nmcli:
+      state: present
+      conn_name: eth0
+      dns4:
+      - 192.168.122.3
+    
+  - name: Start to NetworkManager Service
+    service:
+      name: NetworkManager
+      state: restarted
+    
+#   - name: Bastion replace DNS3
+#     lineinfile:
+#       path: /etc/sysconfig/network-scripts/ifcfg-eth0
+#       line: DNS1=192.168.122.3
