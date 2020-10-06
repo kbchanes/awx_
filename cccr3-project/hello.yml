@@ -16,7 +16,7 @@
   - name: Bastion replace DNS2
     lineinfile:
       path: /etc/named.rfc1912.zones
-      line: "item"
+      line: "{{ item }}"
     with_items:
       - "zone \"cccr3.com\" IN {"
       - "        type master;"
