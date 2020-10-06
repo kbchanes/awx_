@@ -37,7 +37,7 @@
       - " 1H ; retry"
       - " 1W ; expire"
       - " 3H ) ; minimum"
-      - " IN NS ns.cccr3.com.
+      - " IN NS ns.cccr3.com."
       - "ns IN A 192.168.122.3"
       - "* IN A 192.168.122.244"
       - "okd IN A 192.168.122.244"
