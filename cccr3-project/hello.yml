@@ -7,7 +7,7 @@
     replace:
       path: /etc/named.conf
       regexp: "({ 127.0.0.1; };)$"
-      replace: "        listen-on port 53 { any; };"
+      replace: "{ any; };"
 #    with_items:
 #      - { regexp: "^        listen-on port 53 ", replace: "        listen-on port 53 { any; };" }
 #      - { regexp: "^        listen-on-v6 port 53 ", replace: "        listen-on-v6 port 53 { any; };" }
