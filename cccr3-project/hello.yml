@@ -6,8 +6,8 @@
   - name: Bastion replace DNS1
     replace:
       path: /etc/named.conf
-      regexp: {{ item.regexp }}
-      replace: {{ item.replace }}
+      regexp: "{{ item.regexp }}"
+      replace: "{{ item.replace }}"
     with_items:
       - { regexp: "({ 127.0.0.1; };)$", replace: "{ any; };" }
       - { regexp: "({ ::1; };)$", replace: "{ any; };" }
