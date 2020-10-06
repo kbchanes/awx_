@@ -40,7 +40,6 @@
       - "\n"
       - " IN NS ns.cccr3.com."
       - "ns IN A 192.168.122.3"
-      - "* IN A 192.168.122.244"
       - "okd IN A 192.168.122.244"
       
   - name: Start to Named Service
@@ -75,3 +74,22 @@
 #     lineinfile:
 #       path: /etc/sysconfig/network-scripts/ifcfg-eth0
 #       line: DNS1=192.168.122.3
+
+
+- name: Master
+  become: yes
+  hosts: okd
+  tasks:
+  - name: Master replace DNS1
+    lineinfile:
+      path: /etc/sysconfig/network-scripts/ifcfg-eth0
+      line: "{{ item }}"
+    with_items:
+      - "NM_CONTROLLED=yes"
+      - "PEERDNS=yes"
+      - "DNS1=192.168.122.3"
+    
+  - name: Start to NetworkManager Service
+    service:
+      name: NetworkManager
+      state: restarted
