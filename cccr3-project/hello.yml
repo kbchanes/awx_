@@ -8,7 +8,7 @@
       set timeout 300
       spawn "ssh-copy-id student@192.168.122.244"
       
-      expect "yes/no"
+      expect "(yes/no)?"
       send "yes\r"
       
       expect "password:"
