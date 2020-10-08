@@ -4,7 +4,7 @@
   hosts: controller
   tasks:
   - name: SSH-KEY Copy
-    command: sshpass -p dkagh1. ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no root@192.168.122.244
+    command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no root@192.168.122.244
 
   - name: yum expect
     yum:
