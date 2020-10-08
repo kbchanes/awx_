@@ -19,8 +19,8 @@
     expect:
       command: ssh-copy-id student@192.168.122.244
       responses:
-        - Are you sure you want to continue connecting (yes/no)?: yes
-        - student@192.168.122.244's password: dkagh1.
+        - Are you sure you want to continue connecting (yes/no)?: 'yes'
+        - student@192.168.122.244's password: 'dkagh1.'
 
 - name: ssh-test1
   become: yes
