@@ -131,7 +131,7 @@
 
   - name: Write inventory code
     blockinfile:
-      path: /usr/share/ansible/openshift-ansibe/inventory/hosts.localhost
+      path: /usr/share/ansible/openshift-ansible/inventory/hosts.localhost
       create: yes
       block: |
         [OSEv3:children]
