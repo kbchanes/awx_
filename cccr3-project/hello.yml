@@ -112,7 +112,7 @@
   tasks:
   - name: openshift-release install
     yum:
-      name: centos-release-openshift-origin311
+      name: centos-release-openshift-origin311.noarch
       state: present
     
   - name: yum repolist
