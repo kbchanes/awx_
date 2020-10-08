@@ -127,12 +127,18 @@
   tasks:
   - name: openshift-release install
     yum:
-      name: "{{ item }}"
+      name: centos-release-openshift-origin311.noarch
       state: present
-    with_items:
-      - "centos-release-openshift-origin311.noarch"
-      - "openshift-ansible"
-      - "ansible"
+      
+    command: yum repolist
+      
+    yum:
+      name: openshift-ansible
+      state: present
+      
+    yum:
+      name: ansible
+      state: present
       
 #   - name: Create Inventory file
 #     file:
