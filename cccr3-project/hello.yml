@@ -78,7 +78,7 @@
   - name: SSH-KEY Copy
     shell: |
       set timeout 300
-      spawn ssh-copy-id student@192.168.122.244
+      spawn bash -c "ssh-copy-id student@192.168.122.244"
       
       expect "yes/no"
       send "yes\r"
@@ -87,7 +87,9 @@
       send "dkagh1.\r"
       
       exit 0
-
+    args:
+      executable: /usr/bin/expect
+      
 #   - name: SSH-Key Copy
 #     authorized_key:
 #       user: student
