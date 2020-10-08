@@ -126,6 +126,7 @@
     yum:
       name: "{{ package }}"
     vars:
+      package:
       - centos-release-openshift-origin311.noarch
       - openshift-ansible
       - ansible
