@@ -19,9 +19,8 @@
     expect:
       command: ssh-copy-id student@192.168.122.244
       responses:
-        Question:
-          - yes
-          - dkagh1.
+        - ????????: "yes\r"
+        - password: "dkagh1.\r"
 
 - name: ssh-test1
   become: yes
