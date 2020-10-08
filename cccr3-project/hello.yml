@@ -3,6 +3,11 @@
   become: yes
   hosts: controller
   tasks:
+  - name: yum expect
+    yum:
+      name: expect
+      state: present
+      
   - name: Bastion replace DNS1
     replace:
       path: /etc/named.conf
@@ -70,8 +75,18 @@
       name: NetworkManager
       state: restarted
 
-#   - name: SSH-Keygen
-#     command: "ssh-keygen"
+  - name: SSH-KEY Copy
+    shell: |
+      set timeout 300
+      spawn ssh student@192.168.122.244
+      
+      expect "yes/no"
+      send "yes\r"
+      
+      expect "password:"
+      send "dkagh1."
+      
+      exit 0
 
 #   - name: SSH-Key Copy
 #     authorized_key:
@@ -149,3 +164,5 @@
         okd.cccr3.com
         [nodes]
         okd.cccr3.com openshift_node_group_name='node-config-all-in-one'
+  
+  
