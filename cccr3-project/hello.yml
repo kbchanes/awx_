@@ -3,17 +3,19 @@
   become: yes
   hosts: controller
   tasks:
-#   - name: SSH-KEY Copy
-#     shell: |
-#       /usr/bin/expect<<EOF
-#       set prompt "#"
-#       spawn bash -c "ssh-copy-id student@192.168.122.244"
-#       expect {
-#         "yes/no" { send "yes\r"; exp_continue }\n
-#         -nocase "password" { send "dkagh1.\r"; exp_continue }\n
-#         $prompt
-#       }
-#       EOF
+  - name: SSH-KEY Copy
+    blockinfile:
+      path: /home/student/ssh.sh
+      create: yes
+      block: |
+        #!/bin/bash
+        ssh-copy-id student@192.168.122.244
+        yes
+        dkagh1.
+
+  - name: sh test
+    command:
+      cmd: /home/student/ssh.sh
 
   - name: ssh-key test
     expect:
