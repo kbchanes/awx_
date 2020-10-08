@@ -78,21 +78,6 @@
       name: NetworkManager
       state: restarted
 
-  - name: SSH-KEY Copy
-    shell: |
-      set timeout 300
-      spawn bash -c "ssh-copy-id student@192.168.122.244"
-      
-      expect "yes/no"
-      send "yes\r"
-      
-      expect "password:"
-      send "dkagh1.\r"
-      
-      exit 0
-    args:
-      executable: /usr/bin/expect
-
 - name: Master
   become: yes
   hosts: okd
@@ -114,7 +99,7 @@
   - name: Add sysctl.conf
     lineinfile:
       path: /etc/sysctl.conf
-      line: "net.ipv4.ip_forward = 1"
+      line: "net.ipv4.ip_forward=1"
 
   - name: Start to Network Service
     service:
@@ -127,7 +112,7 @@
   tasks:
   - name: openshift-release install
     yum:
-      name: centos-release-openshift-origin311.noarch
+      name: centos-release-openshift-origin311
       state: present
       
     command: yum repolist
@@ -140,10 +125,7 @@
       name: ansible
       state: present
       
-#   - name: Create Inventory file
-#     file:
-#       path: /usr/share/ansible/openshift-ansibe/inventory/hosts.localhost
-#       state: file
+
       
   - name: Write inventory code
     blockinfile:
