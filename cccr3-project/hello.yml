@@ -84,7 +84,7 @@
       send "yes\r"
       
       expect "password:"
-      send "dkagh1."
+      send "dkagh1.\r"
       
       exit 0
 
