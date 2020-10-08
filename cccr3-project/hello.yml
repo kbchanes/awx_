@@ -124,19 +124,20 @@
     yum:
       name: "{{ item }}"
       state: present
-  with_items:
-    - "centos-release-openshift-origin311.noarch"
-    - "openshift-ansible"
-    - "ansible"
+    with_items:
+      - "centos-release-openshift-origin311.noarch"
+      - "openshift-ansible"
+      - "ansible"
       
-  - name: Create Inventory file
-    file:
-      path: /usr/share/ansible/openshift-ansibe/inventory/hosts.localhost
-      state: file
+#   - name: Create Inventory file
+#     file:
+#       path: /usr/share/ansible/openshift-ansibe/inventory/hosts.localhost
+#       state: file
       
   - name: Write inventory code
     blockinfile:
       path: /usr/share/ansible/openshift-ansibe/inventory/hosts.localhost
+      create: yes
       block: |
         [OSEv3:children]
         masters
