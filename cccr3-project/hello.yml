@@ -129,10 +129,14 @@
     - "openshift-ansible"
     - "ansible"
       
+  - name: Create Inventory file
+    file:
+      path: /usr/share/ansible/openshift-ansibe/inventory/hosts.localhost
+      state: file
+      
   - name: Write inventory code
     blockinfile:
       path: /usr/share/ansible/openshift-ansibe/inventory/hosts.localhost
-      create: yes
       block: |
         [OSEv3:children]
         masters
@@ -170,7 +174,6 @@
         okd.cccr3.com
         [nodes]
         okd.cccr3.com openshift_node_group_name='node-config-all-in-one'
-    sudo: yes
   
   - name: ansible-playbook deploy1
     command: ansible-playbook -i /usr/share/ansible/openshift-ansibleinventory/hosts.localhost /usr/share/ansible/openshift-ansible/playbooks/prerequisites.yml
