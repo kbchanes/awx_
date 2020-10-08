@@ -5,19 +5,15 @@
   tasks:
   - name: SSH-KEY Copy
     shell: |
-      set timeout 300
-      spawn "ssh-copy-id student@192.168.122.244"
-      
-      expect "(yes/no)?"
-      send "yes\r"
-      
-      expect "password:"
-      send "dkagh1.\r"
-      
-      exit 0
-    args:
-      executable: /usr/bin/expect
-    delegate_to: controller
+      /usr/bin/expect<<EOF
+      set prompt "#"
+      spawn bash -c "ssh-copy-id student@192.168.122.244"
+      expect {
+        "yes/no" { send "yes\r"; exp_continue}
+        -nocase "password" {send "dkagh1.\r"; exp_continue }
+        $prompt
+      }
+      EOF
 
 - name: ssh-test1
   become: yes
