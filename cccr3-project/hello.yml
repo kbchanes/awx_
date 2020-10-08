@@ -4,27 +4,15 @@
   hosts: controller
   tasks:
   - name: SSH-KEY Copy
-    lineinfile:
-      path: /home/student/ssh.sh
-      create: yes
-      mode: 755
-      line: "{{ item }}"
-    with_items:
-      - #!/bin/bash
-      - ssh-copy-id student@192.168.122.244
-      - yes
-      - dkagh1.
+    command: ssh-copy-id -i /home/student/.ssh/id_rsa.pub -o StrictHostKeyChecking=no student@192.168.122.244
+    
 
-  - name: sh test
-    command:
-      cmd: /home/student/ssh.sh
-
-  - name: ssh-key test
-    expect:
-      command: ssh-copy-id student@192.168.122.244
-      responses:
-        - Are you sure you want to continue connecting (yes/no)? 'yes'
-        - student@192.168.122.244's password 'dkagh1.'
+#   - name: ssh-key test
+#     expect:
+#       command: ssh-copy-id student@192.168.122.244
+#       responses:
+#         - Are you sure you want to continue connecting (yes/no)? 'yes'
+#         - student@192.168.122.244's password 'dkagh1.'
 
 - name: ssh-test1
   become: yes
