@@ -130,9 +130,9 @@
       name: "{{ item }}"
       state: present
     with_items:
-      - centos-release-openshift-origin311.noarch
-      - openshift-ansible
-      - ansible
+      - "centos-release-openshift-origin311.noarch"
+      - "openshift-ansible"
+      - "ansible"
       
 #   - name: Create Inventory file
 #     file:
