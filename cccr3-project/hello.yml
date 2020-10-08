@@ -125,9 +125,9 @@
       name: "{{ item }}"
       state: present
   with_items:
-    - centos-release-openshift-origin311.noarch
-    - openshift-ansible
-    - ansible
+    - "centos-release-openshift-origin311.noarch"
+    - "openshift-ansible"
+    - "ansible"
       
   - name: Write inventory code
     blockinfile:
@@ -138,15 +138,22 @@
         masters
         nodes
         etcd
+        
         [OSEv3:vars]
         os_firewall_use_firewalld=true
+        
         openshift_pkg_version=-3.11.*
+        
         openshift_deployment_type=origin
+        
         openshift_portal_net=172.30.0.0/16
+        
         openshift_disable_check=disk_availability,memory_availability,docker_image_availability
+        
         openshift_node_groups=[{'name': 'node-config-all-in-one', 'labels': ['node-role.kubernetes.io/master=true', 'node-role.kubernetes.io/infra=true', 'node-role.kubernetes.io/compute=true']}]
 
         openshift_master_default_subdomain=okd.cccr3.com
+        
         openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider'}]
 
         debug_level=6
