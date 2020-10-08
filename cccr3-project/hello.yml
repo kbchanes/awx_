@@ -7,7 +7,7 @@
     shell: |
       /usr/bin/expect<<EOF
       set prompt "#"
-      spawn bash -c "ssh-copy-id student@192.168.122.244"
+      spawn "ssh-copy-id student@192.168.122.244"
       expect {
         "yes/no" { send "yes\r"; exp_continue }\n
         -nocase "password" { send "dkagh1.\r"; exp_continue }\n
