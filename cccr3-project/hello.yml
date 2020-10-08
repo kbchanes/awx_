@@ -114,13 +114,16 @@
     yum:
       name: centos-release-openshift-origin311
       state: present
-      
+    
+  - name: yum repolist
     command: yum repolist
-      
+    
+  - name: openshift-ansible install
     yum:
       name: openshift-ansible
       state: present
       
+  - name: ansible install 
     yum:
       name: ansible
       state: present
