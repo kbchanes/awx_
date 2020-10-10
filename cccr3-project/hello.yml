@@ -11,8 +11,8 @@
       conn_name: eth0
       ifname: eth0
       type: ethernet
-      dns4: 192.168.122.40
-      ipv4: 192.168.122.40
+      dns4: "192.168.122.40"
+      ipv4: "192.168.122.40"
       dhcp_client_id: manual
       state: present
       
