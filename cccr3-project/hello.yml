@@ -27,159 +27,159 @@
       - { regexp: "({ ::1; };)$", replace: "{ any; };" }
       - { regexp: "({ localhost; };)$", replace: "{ any; };" }
       
-  - name: Bastion replace DNS2
-    lineinfile:
-      path: /etc/named.rfc1912.zones
-      line: "{{ item }}"
-    with_items:
-      - "zone \"cccr3.com\" IN {"
-      - " type master;"
-      - " file \"cccr3.com.zone\";"
-      - " allow-update { none; };"
-      - "}; "
+#   - name: Bastion replace DNS2
+#     lineinfile:
+#       path: /etc/named.rfc1912.zones
+#       line: "{{ item }}"
+#     with_items:
+#       - "zone \"cccr3.com\" IN {"
+#       - " type master;"
+#       - " file \"cccr3.com.zone\";"
+#       - " allow-update { none; };"
+#       - "}; "
 
-  - name: Create zone file
-    lineinfile:
-      path: /var/named/cccr3.com.zone
-      create: yes
-      line: "{{ item }}"
-    with_items:
-      - "$TTL 3H"
-      - "@ IN SOA ns.cccr3.com. root.cccr3.com. ( "
-      - " 0 ; serial"
-      - " 1D ; refresh"
-      - " 1H ; retry"
-      - " 1W ; expire"
-      - " 3H ) ; minimum"
-      - "\n"
-      - " IN NS ns.cccr3.com."
-      - "ns IN A 192.168.122.3"
-      - "okd IN A 192.168.122.244"
+#   - name: Create zone file
+#     lineinfile:
+#       path: /var/named/cccr3.com.zone
+#       create: yes
+#       line: "{{ item }}"
+#     with_items:
+#       - "$TTL 3H"
+#       - "@ IN SOA ns.cccr3.com. root.cccr3.com. ( "
+#       - " 0 ; serial"
+#       - " 1D ; refresh"
+#       - " 1H ; retry"
+#       - " 1W ; expire"
+#       - " 3H ) ; minimum"
+#       - "\n"
+#       - " IN NS ns.cccr3.com."
+#       - "ns IN A 192.168.122.3"
+#       - "okd IN A 192.168.122.244"
       
-  - name: Start to Named Service
-    service:
-      name: named
-      state: started
-      enabled: yes
+#   - name: Start to Named Service
+#     service:
+#       name: named
+#       state: started
+#       enabled: yes
         
-  - name: 53 Port enabled
-    firewalld:
-      port: "{{ item }}"
-      permanent: yes
-      state: enabled
-    with_items:
-      - "53/tcp"
-      - "53/udp"
+#   - name: 53 Port enabled
+#     firewalld:
+#       port: "{{ item }}"
+#       permanent: yes
+#       state: enabled
+#     with_items:
+#       - "53/tcp"
+#       - "53/udp"
 
-  - name: Setting to DNS
-    nmcli:
-      ifname: eth0
-      type: ethernet
-      conn_name: eth0
-      dns4: 192.168.122.3
-      state: present
+#   - name: Setting to DNS
+#     nmcli:
+#       ifname: eth0
+#       type: ethernet
+#       conn_name: eth0
+#       dns4: 192.168.122.3
+#       state: present
     
-  - name: Start to NetworkManager Service
-    service:
-      name: NetworkManager
-      state: restarted
+#   - name: Start to NetworkManager Service
+#     service:
+#       name: NetworkManager
+#       state: restarted
 
-- name: Master
-  become: yes
-  hosts: okd
-  tasks:
-  - name: Master replace DNS1
-    lineinfile:
-      path: /etc/sysconfig/network-scripts/ifcfg-eth0
-      line: "{{ item }}"
-    with_items:
-      - "NM_CONTROLLED=yes"
-      - "PEERDNS=yes"
-      - "DNS1=192.168.122.3"
+# - name: Master
+#   become: yes
+#   hosts: okd
+#   tasks:
+#   - name: Master replace DNS1
+#     lineinfile:
+#       path: /etc/sysconfig/network-scripts/ifcfg-eth0
+#       line: "{{ item }}"
+#     with_items:
+#       - "NM_CONTROLLED=yes"
+#       - "PEERDNS=yes"
+#       - "DNS1=192.168.122.3"
     
-  - name: Start to NetworkManager Service
-    service:
-      name: NetworkManager
-      state: restarted
+#   - name: Start to NetworkManager Service
+#     service:
+#       name: NetworkManager
+#       state: restarted
 
-  - name: Add sysctl.conf
-    lineinfile:
-      path: /etc/sysctl.conf
-      line: "net.ipv4.ip_forward=1"
+#   - name: Add sysctl.conf
+#     lineinfile:
+#       path: /etc/sysctl.conf
+#       line: "net.ipv4.ip_forward=1"
 
-  - name: Start to Network Service
-    service:
-      name: network
-      state: restarted
+#   - name: Start to Network Service
+#     service:
+#       name: network
+#       state: restarted
   
-- name: OKD3.11 install 
-  become: yes
-  hosts: controller
-  tasks:
-  - name: openshift-release install
-    yum:
-      name: centos-release-openshift-origin311.noarch
-      state: present
+# - name: OKD3.11 install 
+#   become: yes
+#   hosts: controller
+#   tasks:
+#   - name: openshift-release install
+#     yum:
+#       name: centos-release-openshift-origin311.noarch
+#       state: present
     
-  - name: yum repolist
-    command: yum repolist
+#   - name: yum repolist
+#     command: yum repolist
     
-  - name: openshift-ansible install
-    yum:
-      name: openshift-ansible
-      state: present
+#   - name: openshift-ansible install
+#     yum:
+#       name: openshift-ansible
+#       state: present
       
-  - name: ansible install 
-    yum:
-      name: ansible
-      state: present
+#   - name: ansible install 
+#     yum:
+#       name: ansible
+#       state: present
       
 
-  - name: Write inventory code
-    blockinfile:
-      path: /usr/share/ansible/openshift-ansible/inventory/hosts.localhost
-      create: yes
-      block: |
-        [OSEv3:children]
-        masters
-        nodes
-        etcd
+#   - name: Write inventory code
+#     blockinfile:
+#       path: /usr/share/ansible/openshift-ansible/inventory/hosts.localhost
+#       create: yes
+#       block: |
+#         [OSEv3:children]
+#         masters
+#         nodes
+#         etcd
         
-        [OSEv3:vars]
-        os_firewall_use_firewalld=true
+#         [OSEv3:vars]
+#         os_firewall_use_firewalld=true
         
-        openshift_pkg_version=-3.11.*
+#         openshift_pkg_version=-3.11.*
         
-        openshift_deployment_type=origin
+#         openshift_deployment_type=origin
         
-        openshift_portal_net=172.30.0.0/16
+#         openshift_portal_net=172.30.0.0/16
         
-        openshift_disable_check=disk_availability,memory_availability,docker_image_availability
+#         openshift_disable_check=disk_availability,memory_availability,docker_image_availability
         
-        openshift_node_groups=[{'name': 'node-config-all-in-one', 'labels': ['node-role.kubernetes.io/master=true', 'node-role.kubernetes.io/infra=true', 'node-role.kubernetes.io/compute=true']}]
+#         openshift_node_groups=[{'name': 'node-config-all-in-one', 'labels': ['node-role.kubernetes.io/master=true', 'node-role.kubernetes.io/infra=true', 'node-role.kubernetes.io/compute=true']}]
 
-        openshift_master_default_subdomain=okd.cccr3.com
+#         openshift_master_default_subdomain=okd.cccr3.com
         
-        openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider'}]
+#         openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider'}]
 
-        debug_level=6
+#         debug_level=6
 
-        ansible_ssh_user=root
+#         ansible_ssh_user=root
 
-        ansible_become=true
+#         ansible_become=true
 
-        openshift_cockpit_deployer_image='docker.io/timbordemann/cockpit-kubernetes:latest'
+#         openshift_cockpit_deployer_image='docker.io/timbordemann/cockpit-kubernetes:latest'
 
-        [masters]
-        okd.cccr3.com openshift_schedulable=true
-        [etcd]
-        okd.cccr3.com
-        [nodes]
-        okd.cccr3.com openshift_node_group_name='node-config-all-in-one'
+#         [masters]
+#         okd.cccr3.com openshift_schedulable=true
+#         [etcd]
+#         okd.cccr3.com
+#         [nodes]
+#         okd.cccr3.com openshift_node_group_name='node-config-all-in-one'
   
-  - name: ansible-playbook deploy1
-    command: ansible-playbook -i /usr/share/ansible/openshift-ansible/inventory/hosts.localhost /usr/share/ansible/openshift-ansible/playbooks/prerequisites.yml
+#   - name: ansible-playbook deploy1
+#     command: ansible-playbook -i /usr/share/ansible/openshift-ansible/inventory/hosts.localhost /usr/share/ansible/openshift-ansible/playbooks/prerequisites.yml
     
-  - name: ansible-playbook deploy2
-    command: ansible-playbook -i /usr/share/ansible/openshift-ansible/inventory/hosts.localhost /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml
+#   - name: ansible-playbook deploy2
+#     command: ansible-playbook -i /usr/share/ansible/openshift-ansible/inventory/hosts.localhost /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml
     
