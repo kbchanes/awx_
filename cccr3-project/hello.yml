@@ -72,14 +72,14 @@
       - "53/tcp"
       - "53/udp"
 
-  - name: Setting to DNS
-    nmcli:
-      ifname: eth0
-      type: ethernet
-      conn_name: eth0
-      ipv4: "192.168.122.40/24"
-      gw4: 192.168.122.1
-      state: present
+#   - name: Setting to DNS
+#     nmcli:
+#       ifname: eth0
+#       type: ethernet
+#       conn_name: eth0
+
+#       gw4: 192.168.122.1
+#       state: present
     
   - name: DNS Setting
     lineinfile:
