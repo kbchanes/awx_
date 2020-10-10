@@ -13,7 +13,7 @@
       type: ethernet
       dns4: "192.168.122.40"
       ipv4: "192.168.122.40"
-      dhcp_client_id: manual
+      dhcp_client_id: Manual
       state: present
       
       
