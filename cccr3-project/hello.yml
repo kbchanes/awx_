@@ -105,6 +105,12 @@
       - "PEERDNS=yes"
       - "DNS1=192.168.122.40"
     
+  - name: DNS setting
+    lineinfile:
+      path: /etc/resolv.conf
+      regexp: "^nameserver"
+      line: "nameserver 192.168.122.40"
+    
   - name: Start to NetworkManager Service
     service:
       name: NetworkManager
