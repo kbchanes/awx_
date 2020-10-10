@@ -77,7 +77,7 @@
       ifname: eth0
       type: ethernet
       conn_name: eth0
-      ipv4: 192.168.122.40
+      ipv4: 192.168.122.40/24
       gw4: 192.168.122.1
       dns4: 192.168.122.40
       state: present
