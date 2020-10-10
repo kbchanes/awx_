@@ -78,7 +78,7 @@
       ifname: eth0
       type: ethernet
       conn_name: eth0
-      dns4: 192.168.122.3
+      dns4: 192.168.122.40
       state: present
     
   - name: Start to NetworkManager Service
@@ -97,7 +97,7 @@
     with_items:
       - "NM_CONTROLLED=yes"
       - "PEERDNS=yes"
-      - "DNS1=192.168.122.3"
+      - "DNS1=192.168.122.40"
     
   - name: Start to NetworkManager Service
     service:
