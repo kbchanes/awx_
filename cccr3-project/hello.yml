@@ -54,7 +54,7 @@
       - " 3H ) ; minimum"
       - "\n"
       - " IN NS ns.cccr3.com."
-      - "ns IN A 192.168.122.3"
+      - "ns IN A 192.168.122.40"
       - "okd IN A 192.168.122.244"
       
   - name: Start to Named Service
@@ -77,9 +77,8 @@
       ifname: eth0
       type: ethernet
       conn_name: eth0
-      ipv4: 192.168.122.40/24
+      ipv4: "192.168.122.40/24"
       gw4: 192.168.122.1
-      dns4: 192.168.122.40
       state: present
     
   - name: DNS Setting
