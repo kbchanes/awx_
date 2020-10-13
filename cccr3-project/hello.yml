@@ -28,7 +28,7 @@
       - "192.168.122.145 ns.cccr3.com"
       - "192.168.122.244 okd.cccr3.com"
   
-  - name: package install
+  - name: epel-release, bind, net-tools install
     yum:
       name: epel-release
       state: present
@@ -41,13 +41,6 @@
       name: net-tools
       state: present  
     
-    yum:
-      name: NetworkManager
-      state: present  
-    
-    yum:
-      name: firewalld
-      state: present
   
   - name: Static IP setting
     lineinfile:
