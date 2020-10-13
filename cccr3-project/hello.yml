@@ -23,6 +23,11 @@
       - "DNS1=192.168.122.40"
      # backrefs: yes
       
+  - name: Network service Restart
+    service:
+      name: network
+      state: restarted
+      
   - name: Bind install
     yum:
       name: bind
