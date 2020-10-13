@@ -4,8 +4,12 @@
   hosts: controller
   tasks:
   - name: SSH-KEY Copy
-    command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no root@192.168.122.244
-
+    command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no root@192.168.122.145
+    
+- name: ssh-test
+  become: yes
+  hosts: bastion
+  tasks:
   - name: Static IP setting
     lineinfile:
       path: /etc/sysconfig/network-scripts/ifcfg-eth0
@@ -17,10 +21,10 @@
       path: /etc/sysconfig/network-scripts/ifcfg-eth0
       line: "{{ item }}"
     with_items:
-      - "IPADDR=192.168.122.40"
+      - "IPADDR=192.168.122.145"
       - "NETMASK=255.255.255.0"
       - "GATEWAY=192.168.122.1"
-      - "DNS1=192.168.122.40"
+      - "DNS1=192.168.122.145"
      # backrefs: yes
       
   - name: Network service Restart
@@ -69,7 +73,7 @@
       - " 3H ) ; minimum"
       - "\n"
       - " IN NS ns.cccr3.com."
-      - "ns IN A 192.168.122.40"
+      - "ns IN A 192.168.122.145"
       - "okd IN A 192.168.122.244"
       
   - name: Start to Named Service
@@ -100,7 +104,7 @@
     lineinfile:
       path: /etc/resolv.conf
       regexp: "^nameserver"
-      line: "nameserver 192.168.122.40"
+      line: "nameserver 192.168.122.145"
     
   - name: Start to NetworkManager Service
     service:
@@ -118,13 +122,13 @@
     with_items:
       - "NM_CONTROLLED=yes"
       - "PEERDNS=yes"
-      - "DNS1=192.168.122.40"
+      - "DNS1=192.168.122.145"
     
   - name: DNS setting
     lineinfile:
       path: /etc/resolv.conf
       regexp: "^nameserver"
-      line: "nameserver 192.168.122.40"
+      line: "nameserver 192.168.122.145"
     
   - name: Start to NetworkManager Service
     service:
@@ -143,7 +147,7 @@
   
 - name: OKD3.11 install 
   become: yes
-  hosts: controller
+  hosts: bastion
   tasks:
   - name: openshift-release install
     yum:
