@@ -19,6 +19,25 @@
   - name: SSH-KEY Copy3
     command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no okd.cccr3.com
   
+  - name: Host file setting
+    lineinfile:
+      path: /etc/hosts
+      line: "{{ item }}"
+    with_items:
+      - "192.168.122.145 ns.cccr3.com"
+      - "192.168.122.244 okd.cccr3.com"
+  
+  - name: package install
+    yum:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - "bind"
+      - "epel-release"
+      - "net-tools"
+      - "NetworkManager"
+      - "firewalld"
+  
   - name: Static IP setting
     lineinfile:
       path: /etc/sysconfig/network-scripts/ifcfg-eth0
@@ -45,11 +64,6 @@
     service:
       name: network
       state: restarted
-      
-  - name: Bind install
-    yum:
-      name: bind
-      state: present
       
   - name: Bastion replace DNS1
     replace:
@@ -126,10 +140,32 @@
       name: NetworkManager
       state: restarted
 
+
+
+
 - name: Master
   become: yes
   hosts: okd
   tasks:
+  - name: package install
+    yum:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - "bind"
+      - "epel-release"
+      - "net-tools"
+      - "NetworkManager"
+      - "firewalld"  
+  
+  - name: Host file setting
+    lineinfile:
+      path: /etc/hosts
+      line: "{{ item }}"
+    with_items:
+      - "192.168.122.145 ns.cccr3.com"
+      - "192.168.122.244 okd.cccr3.com" 
+ 
   - name: Master replace DNS1
     lineinfile:
       path: /etc/sysconfig/network-scripts/ifcfg-eth0
@@ -160,6 +196,8 @@
       name: network
       state: restarted
   
+  
+  
 - name: OKD3.11 install 
   become: yes
   hosts: bastion
@@ -168,24 +206,17 @@
     yum:
       name: centos-release-openshift-origin311.noarch
       state: present
-    
+      
   - name: yum repolist
     command: yum repolist
-    
-  - name: openshift-ansible install
-    yum:
-      name: openshift-ansible
-      state: present
       
-  - name: ansible install 
     yum:
-      name: ansible
+      name: "{{ item }}"
       state: present
-      
-  - name: python-pip install
-    yum:
-      name: python-pip
-      state: present
+    with_items:
+      - "openshift-ansible"
+      - "ansible"
+      - "python-pip"
       
   - name: pip insatll ansible
     pip:
@@ -203,13 +234,9 @@
         
         [OSEv3:vars]
         os_firewall_use_firewalld=true
-        
         openshift_pkg_version=-3.11.*
-        
         openshift_deployment_type=origin
-        
         openshift_portal_net=172.30.0.0/16
-        
         openshift_disable_check=disk_availability,memory_availability,docker_image_availability
         
         openshift_node_groups=[{'name': 'node-config-all-in-one', 'labels': ['node-role.kubernetes.io/master=true', 'node-role.kubernetes.io/infra=true', 'node-role.kubernetes.io/compute=true']}]
