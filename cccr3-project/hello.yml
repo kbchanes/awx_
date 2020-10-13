@@ -24,7 +24,7 @@
       path: /etc/hosts
       line: "{{ item }}"
     with_items:
-      - " "
+      - "\n"
       - "192.168.122.145 ns.cccr3.com"
       - "192.168.122.244 okd.cccr3.com"
   
@@ -182,7 +182,7 @@
       path: /etc/hosts
       line: "{{ item }}"
     with_items:
-      - " "
+      - "\n"
       - "192.168.122.145 ns.cccr3.com"
       - "192.168.122.244 okd.cccr3.com" 
  
@@ -226,7 +226,9 @@
       name: centos-release-openshift-origin311.noarch
       state: present
       
-    command: yum repolist
+  - name: command
+    command:
+      cmd: yum repolist
       
   - name: openshift-ansible install
     yum:
