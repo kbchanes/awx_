@@ -16,6 +16,9 @@
   - name: SSH-KEY Copy3
     command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no root@192.168.122.244
   
+  - name: SSH-KEY Copy3
+    command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no okd.cccr3.com
+  
   - name: Static IP setting
     lineinfile:
       path: /etc/sysconfig/network-scripts/ifcfg-eth0
