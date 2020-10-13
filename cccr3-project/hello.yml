@@ -205,8 +205,8 @@
       name: centos-release-openshift-origin311.noarch
       state: present
       
-  - name: yum repolist
-    command: yum repolist
+#   - name: yum repolist
+#     command: yum repolist
       
     yum:
       name: "{{ item }}"
