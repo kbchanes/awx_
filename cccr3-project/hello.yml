@@ -228,15 +228,17 @@
       
     command: yum repolist
       
-
+  - name: openshift-ansible install
     yum:
       name: openshift-ansible
       state: present
-    
+
+  - name: ansible install
     yum:
       name: ansible
       state: present
       
+  - name: python-pip install
     yum:
       name: python-pip
       state: present
