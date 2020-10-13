@@ -24,19 +24,30 @@
       path: /etc/hosts
       line: "{{ item }}"
     with_items:
+      - " "
       - "192.168.122.145 ns.cccr3.com"
       - "192.168.122.244 okd.cccr3.com"
   
   - name: package install
     yum:
-      name: "{{ item }}"
+      name: bind
       state: present
-    with_items:
-      - "bind"
-      - "epel-release"
-      - "net-tools"
-      - "NetworkManager"
-      - "firewalld"
+      
+    yum:
+      name: epel-release
+      state: present  
+    
+    yum:
+      name: net-tools
+      state: present  
+    
+    yum:
+      name: NetworkManager
+      state: present  
+    
+    yum:
+      name: firewalld
+      state: present
   
   - name: Static IP setting
     lineinfile:
@@ -149,20 +160,31 @@
   tasks:
   - name: package install
     yum:
-      name: "{{ item }}"
+      name: bind
       state: present
-    with_items:
-      - "bind"
-      - "epel-release"
-      - "net-tools"
-      - "NetworkManager"
-      - "firewalld"  
+      
+    yum:
+      name: epel-release
+      state: present  
+    
+    yum:
+      name: net-tools
+      state: present  
+    
+    yum:
+      name: NetworkManager
+      state: present  
+    
+    yum:
+      name: firewalld
+      state: present
   
   - name: Host file setting
     lineinfile:
       path: /etc/hosts
       line: "{{ item }}"
     with_items:
+      - " "
       - "192.168.122.145 ns.cccr3.com"
       - "192.168.122.244 okd.cccr3.com" 
  
@@ -205,16 +227,20 @@
       name: centos-release-openshift-origin311.noarch
       state: present
       
-#   - name: yum repolist
-#     command: yum repolist
+  - name: yum repolist
+    command: yum repolist
       
     yum:
-      name: "{{ item }}"
+      name: openshift-ansible
       state: present
-    with_items:
-      - "openshift-ansible"
-      - "ansible"
-      - "python-pip"
+    
+    yum:
+      name: ansible
+      state: present
+      
+    yum:
+      name: python-pip
+      state: present
       
   - name: pip insatll ansible
     pip:
@@ -259,8 +285,8 @@
         okd.cccr3.com openshift_node_group_name='node-config-all-in-one'
   
   - name: ansible-playbook deploy1
-    command: ansible-playbook -i /usr/share/ansible/openshift-ansible/inventory/hosts.localhost /usr/share/ansible/openshift-ansible/playbooks/prerequisites.yml -b
+    command: ansible-playbook -i /usr/share/ansible/openshift-ansible/inventory/hosts.localhost /usr/share/ansible/openshift-ansible/playbooks/prerequisites.yml
     
   - name: ansible-playbook deploy2
-    command: ansible-playbook -i /usr/share/ansible/openshift-ansible/inventory/hosts.localhost /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml -b
+    command: ansible-playbook -i /usr/share/ansible/openshift-ansible/inventory/hosts.localhost /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml
     
