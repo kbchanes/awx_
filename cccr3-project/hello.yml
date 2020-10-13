@@ -30,11 +30,11 @@
   
   - name: package install
     yum:
-      name: bind
+      name: epel-release
       state: present
       
     yum:
-      name: epel-release
+      name: bind
       state: present  
     
     yum:
@@ -152,8 +152,6 @@
       state: restarted
 
 
-
-
 - name: Master
   become: yes
   hosts: okd
@@ -218,6 +216,7 @@
       name: network
       state: restarted
   
+  
 - name: OKD3.11 install 
   become: yes
   hosts: bastion
@@ -227,9 +226,9 @@
       name: centos-release-openshift-origin311.noarch
       state: present
       
-  - name: yum repolist
-    command: yum repolist
+   - command: yum repolist
       
+
     yum:
       name: openshift-ansible
       state: present
