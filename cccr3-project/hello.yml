@@ -196,8 +196,6 @@
       name: network
       state: restarted
   
-  
-  
 - name: OKD3.11 install 
   become: yes
   hosts: bastion
