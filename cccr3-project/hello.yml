@@ -13,11 +13,14 @@
   become: yes
   hosts: bastion
   tasks:
+  - name: Generate /etc/ssh/ RSA host key
+    command : ssh-keygen -q -t rsa -f /etc/ssh/ssh_host_rsa_key -C "" -N ""
+  
   - name: SSH-KEY Copy3
     command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no root@192.168.122.139
   
-#   - name: SSH-KEY Copy3
-#     command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no okd.cccr3.com
+  - name: SSH-KEY Copy4
+    command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no okd.cccr3.com
   
   - name: Host file setting
     lineinfile:
@@ -241,9 +244,6 @@
   - name: pip insatll ansible
     pip:
       name: ansible==2.6.20
-
-  - name: SSH-KEY Copy3
-    command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no okd.cccr3.com
 
   - name: Write inventory code
     blockinfile:
