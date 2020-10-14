@@ -16,8 +16,6 @@
   - name: Generate /etc/ssh/ RSA host key
     connection: local
     command : ssh-keygen -b 2048 -t rsa -f /root/.ssh/id_rsa -q -N ""
-  ignore_errors: yes
-  run_once: true
   
   - name: install sshpass
     yum:
