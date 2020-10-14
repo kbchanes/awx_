@@ -20,6 +20,8 @@
 #       run_once: true
 #       args:
 #         creates: /root/.ssh/id_rsa
+  - name: SSH-KEY Copy1
+    command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no root@192.168.122.176    
       
   - name: SSH-KEY Copy3
     command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no root@192.168.122.139
