@@ -13,13 +13,13 @@
   become: yes
   hosts: bastion
   tasks:
-  - name: Generate /etc/ssh/ RSA host key
-    connection: local
-    command : ssh-keygen -b 2048 -t rsa -f /root/.ssh/id_rsa -q -N ""
-      ignore_errors: yes
-      run_once: true
-      args:
-        creates: /root/.ssh/id_rsa
+#   - name: Generate /etc/ssh/ RSA host key
+#     connection: local
+#     command : ssh-keygen -b 2048 -t rsa -f /root/.ssh/id_rsa -q -N ""
+#       ignore_errors: yes
+#       run_once: true
+#       args:
+#         creates: /root/.ssh/id_rsa
       
   - name: SSH-KEY Copy3
     command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no root@192.168.122.139
