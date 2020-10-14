@@ -69,6 +69,7 @@
       - "NETMASK=255.255.255.0"
       - "GATEWAY=192.168.122.1"
       - "DNS1=192.168.122.176"
+      - "DNS2=8.8.8.8"
      # backrefs: yes
   
   - name: Add sysctl.conf
@@ -201,6 +202,7 @@
       - "NETMASK=255.255.255.0"
       - "GATEWAY=192.168.122.1"
       - "DNS1=192.168.122.176"
+      - "DNS2=8.8.8.8"
   
 #   - name: Host file setting
 #     lineinfile:
@@ -219,6 +221,7 @@
       - "NM_CONTROLLED=yes"
       - "PEERDNS=yes"
       - "DNS1=192.168.122.176"
+      - "DNS2=8.8.8.8"
     
   - name: DNS setting
     lineinfile:
