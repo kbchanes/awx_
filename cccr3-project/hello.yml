@@ -202,7 +202,6 @@
       - "GATEWAY=192.168.122.1"
       - "DNS1=192.168.122.176"
   
-  
 #   - name: Host file setting
 #     lineinfile:
 #       path: /etc/hosts
@@ -211,18 +210,6 @@
 #       - "\n"
 #       - "192.168.122.145 ns.cccr3.com"
 #       - "192.168.122.244 okd.cccr3.com" 
-
-  - name: DNS Setting
-    lineinfile:
-      path: /etc/resolv.conf
-      regexp: "^nameserver"
-      line: "nameserver 192.168.122.176"
-      
-  - name: DNS add 8.8.8.8
-    lineinfile:
-      path: /etc/resolv.conf
-      line: "nameserver 8.8.8.8"
-
 
   - name: Master replace DNS1
     lineinfile:
@@ -238,6 +225,11 @@
       path: /etc/resolv.conf
       regexp: "^nameserver"
       line: "nameserver 192.168.122.176"
+         
+  - name: DNS add 8.8.8.8
+    lineinfile:
+      path: /etc/resolv.conf
+      line: "nameserver 8.8.8.8"
     
   - name: Start to NetworkManager Service
     service:
