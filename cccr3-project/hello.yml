@@ -150,6 +150,10 @@
       regexp: "^nameserver"
       line: "nameserver 192.168.122.176"
 
+  - name: DNS add 8.8.8.8
+    lineinfile:
+      path: /etc/resolv.conf
+      line: "nameserver 8.8.8.8"
     
   - name: Start to NetworkManager Service
     service:
@@ -213,6 +217,11 @@
       path: /etc/resolv.conf
       regexp: "^nameserver"
       line: "nameserver 192.168.122.176"
+      
+  - name: DNS add 8.8.8.8
+    lineinfile:
+      path: /etc/resolv.conf
+      line: "nameserver 8.8.8.8"
 
 
   - name: Master replace DNS1
@@ -246,7 +255,7 @@
       state: restarted
   
   
-- name: OKD3.11 install 
+- name:  OKD3.11 install 
   become: yes
   hosts: bastion
   tasks:
