@@ -182,6 +182,23 @@
       name: firewalld
       state: present
   
+  - name: Static IP setting
+    lineinfile:
+      path: /etc/sysconfig/network-scripts/ifcfg-eth0
+      regexp: "^BOOTPROTO="
+      line: BOOTPROTO="static"
+      
+  - name: Static IP setting
+    lineinfile:
+      path: /etc/sysconfig/network-scripts/ifcfg-eth0
+      line: "{{ item }}"
+    with_items:
+      - "IPADDR=192.168.122.139"
+      - "NETMASK=255.255.255.0"
+      - "GATEWAY=192.168.122.1"
+      - "DNS1=192.168.122.176"
+  
+  
 #   - name: Host file setting
 #     lineinfile:
 #       path: /etc/hosts
