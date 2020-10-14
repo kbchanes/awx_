@@ -26,8 +26,8 @@
   - name: SSH-KEY Copy3
     command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no root@192.168.122.139
   
-  - name: SSH-KEY Copy4
-    command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no okd.cccr3.com
+#   - name: SSH-KEY Copy4
+#     command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no okd.cccr3.com
   
   - name: Host file setting
     lineinfile:
@@ -224,6 +224,9 @@
   become: yes
   hosts: bastion
   tasks:
+  - name: SSH-KEY Copy4
+    command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no okd.cccr3.com
+  
   - name: openshift-release install
     yum:
       name: centos-release-openshift-origin311.noarch
