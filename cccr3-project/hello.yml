@@ -17,7 +17,6 @@
     command : ssh-keygen -q -b 2048 -t rsa -N "" -f ~/.ssh/id_rsa
     ignore_errors: yes
     run_once: true
-    create: yes
   
   - name: install sshpass
     yum:
