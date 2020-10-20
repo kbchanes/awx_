@@ -1,7 +1,7 @@
 ---
 - name: ssh-test
   become: yes
-  hosts: controller
+  hosts: bastion
   tasks:
   - name: SSH-KEY Copy1
     command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no root@192.168.122.176
