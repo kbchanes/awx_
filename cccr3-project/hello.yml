@@ -4,13 +4,13 @@
   hosts: bastion
   tasks:
   - name: SSH-KEY Copy1
-    command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no root@10.0.1.116
+    command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no root@15.165.115.16
     
   - name: SSH-KEY Copy2
-    command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no root@10.0.1.124
+    command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no root@3.34.143.51
     
   - name: SSH-KEY Copy2
-    command: sshpass -p toor ssh-copy-id -i /home/centos/awx_bastion.pem -o StrictHostKeyChecking=no root@10.0.1.124
+    command: sshpass -p toor ssh-copy-id -i /home/centos/awx_bastion.pem -o StrictHostKeyChecking=no root@3.34.143.51
     
 - name: ssh-test
   become: yes
