@@ -9,6 +9,9 @@
   - name: SSH-KEY Copy2
     command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no root@10.0.1.124
     
+  - name: SSH-KEY Copy2
+    command: sshpass -p toor ssh-copy-id -i /home/centos/awx_bastion.pem -o StrictHostKeyChecking=no root@10.0.1.124
+    
 - name: ssh-test
   become: yes
   hosts: bastion
