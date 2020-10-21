@@ -11,7 +11,6 @@
     
 #   - name: SSH-KEY Copy2
 #     command: sshpass -p toor ssh-copy-id -i /home/centos/awx_bastion.pem -o StrictHostKeyChecking=no root@3.34.143.51
-    
 - name: ssh-test
   become: yes
   hosts: bastion
@@ -32,16 +31,12 @@
   - name: SSH-KEY Copy4
     command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no okd.cccr3.com
   
-  # bastion ip 지정
-  - name: hi
-    setup:
+  - setup:
     set_fact:
       bastion_ip: "{{ ansible_eth0.ipv4.address }}"
       bastion_fqdn: "{{ ansible_fqdn }}"
-    
-# okd ip 지정   
-  - name: hi
-    setup:
+      
+  - setup:
     delegate_to: okd
     set_fact:
       okd_ip: "{{ ansible_eth0.ipv4.address }}"
