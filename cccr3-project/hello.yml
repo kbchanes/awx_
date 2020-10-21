@@ -32,14 +32,31 @@
   - name: SSH-KEY Copy4
     command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no okd.cccr3.com
   
-  - name: Host file setting
-    lineinfile:
-      path: /etc/hosts
-      line: "{{ item }}"
-    with_items:
-      - "\n"
-      - 192.168.122.176 ns.cccr3.com
-      - 192.168.122.139 okd.cccr3.com
+  # bastion ip 지정
+  - setup:
+    set_fact:
+    bastion_ip: "{{ ansible_eth0.ipv4.address }}"
+    bastion_fqdn: "{{ ansible_fqdn }}"
+    
+# okd ip 지정    
+  - setup:
+    delegate_to: okd
+    set_fact:
+    okd_ip: "{{ ansible_eth0.ipv4.address }}"
+    okd_fqdn: "{{ ansible_fqdn }}"
+
+  - name: template hosts file
+    template:
+      src: ~/hosts.j2
+      dest: /etc/hosts 
+#   - name: Host file setting
+#     lineinfile:
+#       path: /etc/hosts
+#       line: "{{ item }}"
+#     with_items:
+#       - "\n"
+#       - 192.168.122.176 ns.cccr3.com
+#       - 192.168.122.139 okd.cccr3.com
   
   - name: epel-release, bind, net-tools install
     yum:
