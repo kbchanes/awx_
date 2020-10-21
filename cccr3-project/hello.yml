@@ -31,13 +31,13 @@
     command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no okd.cccr3.com
   
  #   setup:
-  - name: h2 
+#   - name: h2 
     set_fact:
       bastion_ip: "{{ ansible_eth0.ipv4.address }}"
       bastion_fqdn: "{{ ansible_fqdn }}"
       
   #  setup:
-  - name: h3
+#   - name: h3
     delegate_to: okd
     set_fact:
       okd_ip: "{{ ansible_eth0.ipv4.address }}"
