@@ -15,7 +15,6 @@
 - name: ssh-test
   become: yes
   hosts: bastion
-  gather_facts: yes
   tasks:
 #   - name: ssh-keygen
 #     command : ssh-keygen -q -b 2048 -t rsa -N "" -f ~/.ssh/id_rsa
@@ -26,13 +25,9 @@
 #     yum:
 #       name: sshpass
 #       state: present
-  - name: set_fact
-    set_fact:
-      bastion_ip: "{{ ansible_eth0.ipv4.address }}"
-      
       
   - name: SSH-KEY Copy3
-    command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no root@"{{ bastion_ip }}"
+    command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no root@192.168.122.176
   
   - name: SSH-KEY Copy4
     command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no okd.cccr3.com
@@ -43,7 +38,7 @@
       line: "{{ item }}"
     with_items:
       - "\n"
-      - \"{{ bastion_ip }}\" ns.cccr3.com
+      - 192.168.122.176 ns.cccr3.com
       - 192.168.122.139 okd.cccr3.com
   
   - name: epel-release, bind, net-tools install
