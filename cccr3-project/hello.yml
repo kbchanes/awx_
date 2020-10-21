@@ -45,7 +45,7 @@
 
   - name: template hosts file
     template:
-      src: ~/hosts.j2
+      src: hosts.j2
       dest: /etc/hosts 
       
 #   - name: Host file setting
