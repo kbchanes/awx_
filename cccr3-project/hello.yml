@@ -30,23 +30,24 @@
   - name: ssh-key copy4
     command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no okd.cccr3.com
   
- #   setup:
-#   - name: h2 
+#   setup:
+  - name: h2 
     set_fact:
       bastion_ip: "{{ ansible_eth0.ipv4.address }}"
       bastion_fqdn: "{{ ansible_fqdn }}"
       
   #  setup:
-#   - name: h3
+  - name: h3
     delegate_to: okd
     set_fact:
       okd_ip: "{{ ansible_eth0.ipv4.address }}"
       okd_fqdn: "{{ ansible_fqdn }}"
 
-#   - name: template hosts file
-#     template:
-#       src: ~/hosts.j2
-#       dest: /etc/hosts 
+  - name: template hosts file
+    template:
+      src: ~/hosts.j2
+      dest: /etc/hosts 
+      
 #   - name: Host file setting
 #     lineinfile:
 #       path: /etc/hosts
