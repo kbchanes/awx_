@@ -25,12 +25,16 @@
 #     yum:
 #       name: sshpass
 #       state: present
+  - name: set_fact
+    set_fact:
+      bastion_ip: "{{ ansible_eth0.ipv4.address }}"
       
-#   - name: SSH-KEY Copy3
-#     command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no root@10.0.1.124
+      
+  - name: SSH-KEY Copy3
+    command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no root@"{{ bastion_ip }}"
   
-#   - name: SSH-KEY Copy4
-#     command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no okd.cccr3.com
+  - name: SSH-KEY Copy4
+    command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no okd.cccr3.com
   
   - name: Host file setting
     lineinfile:
