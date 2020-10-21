@@ -33,17 +33,19 @@
     command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no okd.cccr3.com
   
   # bastion ip 지정
-  - setup:
+  - name: hi
+    setup:
     set_fact:
-    bastion_ip: "{{ ansible_eth0.ipv4.address }}"
-    bastion_fqdn: "{{ ansible_fqdn }}"
+      bastion_ip: "{{ ansible_eth0.ipv4.address }}"
+      bastion_fqdn: "{{ ansible_fqdn }}"
     
-# okd ip 지정    
-  - setup:
+# okd ip 지정   
+  - name: hi
+    setup:
     delegate_to: okd
     set_fact:
-    okd_ip: "{{ ansible_eth0.ipv4.address }}"
-    okd_fqdn: "{{ ansible_fqdn }}"
+      okd_ip: "{{ ansible_eth0.ipv4.address }}"
+      okd_fqdn: "{{ ansible_fqdn }}"
 
   - name: template hosts file
     template:
