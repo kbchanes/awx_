@@ -24,7 +24,6 @@
 #     yum:
 #       name: sshpass
 #       state: present
-      
   - name: SSH-KEY Copy3
     command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no root@192.168.122.176
   
@@ -32,6 +31,7 @@
     command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no okd.cccr3.com
   
     setup:
+    
     set_fact:
       bastion_ip: "{{ ansible_eth0.ipv4.address }}"
       bastion_fqdn: "{{ ansible_fqdn }}"
