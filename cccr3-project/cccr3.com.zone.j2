@@ -1,0 +1,11 @@
+$TTL  3H
+@ IN  SOA ns.cccr3.com. root.cccr3.com. ( "
+  0 ; serial
+  1D  ; refresh
+  1H  ; retry
+  1W  ; expire
+  3H  ) ; minimum
+  
+  IN  NS  ns.cccr3.com.
+ns  IN  A {{ bastion_ip }}
+okd IN  A {{ okd_ip }}
