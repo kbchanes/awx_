@@ -1,0 +1,24 @@
+- name: Master
+  become: yes
+  hosts: okd
+  tasks:
+  - name: package install
+    yum:
+      name: bind
+      state: present
+      
+    yum:
+      name: epel-release
+      state: present  
+    
+    yum:
+      name: net-tools
+      state: present  
+    
+    yum:
+      name: NetworkManager
+      state: present  
+    
+    yum:
+      name: firewalld
+      state: present
