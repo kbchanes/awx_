@@ -4,12 +4,12 @@
   hosts: bastion
   tasks:
   - name: ssh-keygen
-    command : ssh-keygen -q -b 2048 -t rsa -N "" -f ~/.ssh/id_rsa
+    command : ssh-keygen -q -b 2048 -t rsa -N "" -f ~/.ssh/id_rsa -y
     ignore_errors: yes
     run_once: true
     
   - name: SSH-KEY Copy3
-    command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no root@192.168.122.176
+    command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no localhost
     
   - name: ssh-key copy4
     command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no okd.cccr3.com
