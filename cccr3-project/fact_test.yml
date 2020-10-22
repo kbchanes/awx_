@@ -14,6 +14,10 @@
   - name: ssh-key copy4
     command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no root@192.168.122.139
     
+  - name: Set a hostname
+    hostname:
+      name: ns.cccr3.com
+    
   - name: h2 
     set_fact:
       bastion_ip: "{{ ansible_eth0.ipv4.address }}"
