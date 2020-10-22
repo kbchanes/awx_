@@ -36,8 +36,6 @@
       bastion_ip: "{{ ansible_eth0.ipv4.address }}"
       bastion_fqdn: "{{ ansible_fqdn }}"
       
-  #  setup:
-  - name: h3
   - setup:
     delegate_to: okd
     set_fact:
