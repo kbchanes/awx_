@@ -109,10 +109,10 @@
       - "53/tcp"
       - "53/udp"
     
-  - name: Template DNS
-    template:
-      src: resolv.conf.j2
-      dest: /etc/resolv.conf
+#   - name: Template DNS
+#     template:
+#       src: resolv.conf.j2
+#       dest: /etc/resolv.conf
       
       
     
