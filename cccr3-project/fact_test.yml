@@ -114,7 +114,13 @@
 #       src: resolv.conf.j2
 #       dest: /etc/resolv.conf
       
-      
+  - name: Start to NetworkManager Service
+    service:
+      name: NetworkManager
+      state: restarted
+    
+    
+    
     
     
     
