@@ -34,14 +34,15 @@
   - name: h2 
     set_fact:
       bastion_ip: "{{ ansible_eth0.ipv4.address }}"
-      bastion_fqdn: "{{ ansible_fqdn }}"
+      bastion_fqdn: "{{ ansible_nodename }}"
 
   - name: h3
     setup:
     delegate_to: okd
+  - name: h4
     set_fact:
       okd_ip: "{{ ansible_eth0.ipv4.address }}"
-      okd_fqdn: "{{ ansible_fqdn }}"
+      okd_fqdn: "{{ ansible_nodename }}"
 
   - name: template hosts file
     template:
