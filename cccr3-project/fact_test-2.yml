@@ -23,6 +23,14 @@
       name: firewalld
       state: present
 
+  - name: delegate_to
+    setup:
+    delegate_to: bastion
+  - name: set_fact
+    set_fact:
+      bastion_ip: "{{ ansible_eth0.ipv4.address }}"
+      bastion_fqdn: "{{ ansible_nodename }}"
+
   - name: Static IP setting
     lineinfile:
       path: /etc/sysconfig/network-scripts/ifcfg-eth0
