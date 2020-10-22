@@ -45,7 +45,7 @@
       - IPADDR={{ ansible_eth0.ipv4.address }}
       - NETMASK={{ ansible_eth0.ipv4.netmask }}
       - GATEWAY={{ ansible_default_ipv4.gateway }}
-      - DNS1={{ ansible_eth0.ipv4.address }}
+      - DNS1={{ bastion_ip }}
       - DNS2=8.8.8.8
       - NM_CONTROLLED=yes
       - PEERDNS=yes
