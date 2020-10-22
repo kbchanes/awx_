@@ -1,2 +1,3 @@
-search {{ ansible_dns.search }}
-nameserver {{ ansible_dns.nameservers }}
+search {{ ansible_dns.domain }}
+nameserver {{ bastion_ip }}
+nameserver 8.8.8.8
