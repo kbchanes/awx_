@@ -38,6 +38,7 @@
       
   #  setup:
   - name: h3
+  - setup:
     delegate_to: okd
     set_fact:
       okd_ip: "{{ ansible_eth0.ipv4.address }}"
