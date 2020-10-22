@@ -8,4 +8,26 @@
     ignore_errors: yes
     run_once: true
     
+  - name: SSH-KEY Copy3
+    command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no root@192.168.122.176
     
+  - name: ssh-key copy4
+    command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no okd.cccr3.com
+    
+  - name: h2 
+    set_fact:
+      bastion_ip: "{{ ansible_eth0.ipv4.address }}"
+      bastion_fqdn: "{{ ansible_nodename }}"
+
+  - name: h3
+    setup:
+    delegate_to: okd
+  - name: h4
+    set_fact:
+      okd_ip: "{{ ansible_eth0.ipv4.address }}"
+      okd_fqdn: "{{ ansible_nodename }}"
+
+  - name: template hosts file
+    template:
+      src: hosts.j2
+      dest: /etc/hosts 
