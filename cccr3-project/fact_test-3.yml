@@ -1,1 +1,42 @@
+---
+- name:  OKD3.11 install 
+  become: yes
+  hosts: bastion
+  tasks:
+  - name: SSH-KEY Copy4
+    command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no okd.cccr3.com
+  
+  - name: openshift-release install
+    yum:
+      name: centos-release-openshift-origin311.noarch
+      state: present
+      
+  - name: command
+    command:
+      cmd: yum repolist
+      
+  - name: openshift-ansible install
+    yum:
+      name:
+        - openshift-ansible
+        - ansible
+        - python-pip
+      state: present
 
+  - name: pip insatll ansible
+    pip:
+      name: ansible==2.6.20
+
+  - name: Template ansible install inventory
+    template:
+      src: inventory_hosts.j2
+      dest: /etc/ansible/hosts
+      
+  - name: ansible-playbook deploy1
+    command: ansible-playbook -i /etc/ansible/hosts /usr/share/ansible/openshift-ansible/playbooks/prerequisites.yml
+    
+  - name: ansible-playbook deploy2
+    command: ansible-playbook -i /etc/ansible/hosts /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml
+
+      
+  
