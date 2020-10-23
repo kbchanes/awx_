@@ -2,7 +2,8 @@
 - name: ssh-test
   become: yes
   hosts: bastion
-  vars_file: vars.yml
+  vars_files:
+    - vars.yml
   tasks:
 #   - name: ssh-keygen
 #     command : ssh-keygen -q -b 2048 -t rsa -N "" -f ~/.ssh/id_rsa -y
