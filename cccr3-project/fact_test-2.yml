@@ -53,15 +53,15 @@
       - NM_CONTROLLED=yes
       - PEERDNS=yes
             
-  - name: Template DNS
-    template:
-      src: resolv.conf.j2
-      dest: /etc/resolv.conf
-      
   - name: Network service Restart
     service:
       name: network
       state: restarted
+            
+  - name: Template DNS
+    template:
+      src: resolv.conf.j2
+      dest: /etc/resolv.conf
 
       
       
