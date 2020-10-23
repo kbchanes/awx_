@@ -22,13 +22,12 @@
   - name: Bastion IP in variable
     set_fact:
       bastion_ip: "{{ ansible_eth0['ipv4']['address'] }}"
-
-  - name: OKD delegate
-    setup:
-    delegate_to: okd
-  - name: OKD IP in variable
-    set_fact:
-      okd_ip: "{{ ansible_eth0['ipv4']['address'] }}"
+#   - name: OKD delegate
+#     setup:
+#     delegate_to: okd
+#   - name: OKD IP in variable
+#     set_fact:
+#       okd_ip: "{{ ansible_eth0['ipv4']['address'] }}"
 
   - name: template hosts file
     template:
