@@ -2,7 +2,8 @@
   become: yes
   hosts: okd
   tasks:
-  vars_file: vars.yml
+  vars_files:
+    - vars.yml
   - name: package install
     yum:
       name: 
@@ -17,13 +18,13 @@
       okd_ip: "{{ ansible_eth0.ipv4.address }}"
       okd_fqdn: "{{ ansible_nodename }}"
 
-  - name: delegate_to
-    setup:
-    delegate_to: bastion
-  - name: set_fact
-    set_fact:
-      bastion_ip: "{{ ansible_eth0.ipv4.address }}"
-      bastion_fqdn: "{{ ansible_nodename }}"
+#   - name: delegate_to
+#     setup:
+#     delegate_to: bastion
+#   - name: set_fact
+#     set_fact:
+#       bastion_ip: "{{ ansible_eth0.ipv4.address }}"
+#       bastion_fqdn: "{{ ansible_nodename }}"
 
   - name: Add sysctl.conf
     lineinfile:
