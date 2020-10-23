@@ -28,7 +28,7 @@
   - name: Add sysctl.conf
     lineinfile:
       path: /etc/sysctl.conf
-      line: {{ bastion['packet_forward'] }}
+      line: {{ packet_forward }}
 
   - name: Start to NetworkManager Service
     service:
