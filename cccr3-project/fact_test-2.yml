@@ -24,6 +24,16 @@
       bastion_ip: "{{ ansible_eth0.ipv4.address }}"
       bastion_fqdn: "{{ ansible_nodename }}"
 
+  - name: Add sysctl.conf
+    lineinfile:
+      path: /etc/sysctl.conf
+      line: "net.ipv4.ip_forward=1"
+
+  - name: Start to NetworkManager Service
+    service:
+      name: NetworkManager
+      state: restarted
+
   - name: Static IP setting
     lineinfile:
       path: /etc/sysconfig/network-scripts/ifcfg-eth0
@@ -48,21 +58,11 @@
       src: resolv.conf.j2
       dest: /etc/resolv.conf
       
-  - name: Add sysctl.conf
-    lineinfile:
-      path: /etc/sysctl.conf
-      line: "net.ipv4.ip_forward=1"
-      
   - name: Network service Restart
     service:
       name: network
       state: restarted
-      
-  - name: Start to NetworkManager Service
-    service:
-      name: NetworkManager
-      state: restarted
-      
+
       
       
       
