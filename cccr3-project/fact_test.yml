@@ -102,8 +102,8 @@
       permanent: yes
       state: enabled
     with_items:
-      - {{ bastion['port'] }}/tcp
-      - {{ bastion['port'] }}/udp
+      - "{{ bastion['port'] }}/tcp"
+      - "{{ bastion['port'] }}/udp"
     
 #   - name: Template DNS
 #     template:
