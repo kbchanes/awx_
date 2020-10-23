@@ -1,8 +1,8 @@
 bastion:
   network:
-    ip:
-    netmask: 255.255.255.0
-    gateway: 192.168.122.1
+    ip: 192.168.0.156
+    netmask: 255.255.255.255
+    gateway: 192.168.0.1
     dns1: 192.168.122.40
     dns2: 8.8.8.8
   hostname: ns.cccr3.com
@@ -11,6 +11,10 @@ bastion:
   
 okd:
   network:
+    ip: 10.178.0.2
+    netmask: 255.255.255.255
+    gateway: 10.178.0.1
+    dns1: 192.168.0.156
   hostname: okd.cccr3.com
   
 type: static
