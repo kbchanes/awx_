@@ -3,7 +3,7 @@ bastion:
     ip: 192.168.0.156
     netmask: 255.255.255.255
     gateway: 192.168.0.1
-    dns1: 192.168.122.40
+    dns1: 192.168.0.156
     dns2: 8.8.8.8
   hostname: ns.cccr3.com
   packet_forward: net.ipv4.ip_forward=1
