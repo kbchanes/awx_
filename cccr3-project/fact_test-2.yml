@@ -4,23 +4,11 @@
   tasks:
   - name: package install
     yum:
-      name: bind
-      state: present
-      
-    yum:
-      name: epel-release
-      state: present  
-    
-    yum:
-      name: net-tools
-      state: present  
-    
-    yum:
-      name: NetworkManager
-      state: present  
-    
-    yum:
-      name: firewalld
+      name: 
+        - bind
+        - net-tools
+        - NetworkManager
+        - firewalld
       state: present
 
   - name: okd set_fact
