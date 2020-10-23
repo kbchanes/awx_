@@ -68,7 +68,7 @@
   - name: Packet forwarding
     lineinfile:
       path: /etc/sysctl.conf
-      line: {{ bastion['packet_forward'] }}
+      line: "{{ packet_forward }}"
       
   - name: Network service Restart
     service:
