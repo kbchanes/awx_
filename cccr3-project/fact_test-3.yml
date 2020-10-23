@@ -3,8 +3,8 @@
   become: yes
   hosts: bastion
   tasks:
-  - name: SSH-KEY Copy4
-    command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no okd.cccr3.com
+#   - name: SSH-KEY Copy4
+#     command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no okd.cccr3.com
   
   - name: h3
     setup:
