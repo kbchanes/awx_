@@ -21,7 +21,7 @@
       - { line2: "        type master;" }
       - { line2: "        file "cccr3team.com.zone";" }
       - { line2: "        allow-update { none; };" }
-      - { line2: "};" }
+      - { line2: "};" }0
 
   - name: Bastion replace DNS3
     lineinfile:
