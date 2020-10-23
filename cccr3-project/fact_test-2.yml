@@ -2,6 +2,7 @@
   become: yes
   hosts: okd
   tasks:
+  vars_file: vars.yml
   - name: package install
     yum:
       name: 
@@ -27,7 +28,7 @@
   - name: Add sysctl.conf
     lineinfile:
       path: /etc/sysctl.conf
-      line: "net.ipv4.ip_forward=1"
+      line: {{ bastion['packet_forward'] }}
 
   - name: Start to NetworkManager Service
     service:
@@ -38,18 +39,18 @@
     lineinfile:
       path: /etc/sysconfig/network-scripts/ifcfg-eth0
       regexp: "^BOOTPROTO="
-      line: BOOTPROTO="static"
+      line: BOOTPROTO={{ type }}
       
   - name: Static IP setting
     lineinfile:
       path: /etc/sysconfig/network-scripts/ifcfg-eth0
       line: "{{ item }}"
     with_items:
-      - IPADDR={{ okd_ip }}
-      - NETMASK={{ ansible_eth0.ipv4.netmask }}
-      - GATEWAY={{ ansible_default_ipv4.gateway }}
-      - DNS1={{ bastion_ip }}
-      - DNS2=8.8.8.8
+      - IPADDR={{ okd['network']['ip'] }}
+      - NETMASK={{ okd['network']['netmask'] }}
+      - GATEWAY={{ okd['network']['gateway'] }}
+      - DNS1={{ okd['network']['dns1'] }}
+      - DNS2={{ okd['network']['dns2'] }}
       - NM_CONTROLLED=yes
       - PEERDNS=yes
             
