@@ -2,6 +2,7 @@
 - name:  OKD3.11 install 
   become: yes
   hosts: bastion
+  vars_file: vars.yml
   tasks:
 #   - name: SSH-KEY Copy4
 #     command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no okd.cccr3.com
