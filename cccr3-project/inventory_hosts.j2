@@ -12,7 +12,7 @@ openshift_disable_check=disk_availability,memory_availability,docker_image_avail
         
 openshift_node_groups=[{'name': 'node-config-all-in-one', 'labels': ['node-role.kubernetes.io/master=true', 'node-role.kubernetes.io/infra=true', 'node-role.kubernetes.io/compute=true']}]
 
-openshift_master_default_subdomain={{ okd_nodename }}
+openshift_master_default_subdomain={{ okd_fqdn }}
         
 openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider'}]
 
@@ -25,8 +25,8 @@ ansible_become=true
 openshift_cockpit_deployer_image='docker.io/timbordemann/cockpit-kubernetes:latest'
 
 [masters]
-{{ okd_nodename }} openshift_schedulable=true
+{{ okd_fqdn }} openshift_schedulable=true
 [etcd]
-{{ okd_nodename }}
+{{ okd_fqdn }}
 [nodes]
-{{ okd_nodename }} openshift_node_group_name='node-config-all-in-one'
+{{ okd_fqdn }} openshift_node_group_name='node-config-all-in-one'
