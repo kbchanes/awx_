@@ -7,5 +7,5 @@ $TTL  3H
   3H  ) ; minimum
   
   IN  NS  ns.cccr3.com.
-ns  IN  A {{ bastion_ip }}
-okd IN  A {{ okd_ip }}
+ns  IN  A {{ bastion['network']['ip'] }}
+okd IN  A {{ okd['network']['ip'] }}
