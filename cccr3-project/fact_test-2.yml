@@ -1,5 +1,5 @@
 ---
-- name: Master
+- name: OKD Master
   become: yes
   hosts: okd
   vars_files:
