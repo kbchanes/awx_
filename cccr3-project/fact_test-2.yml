@@ -31,6 +31,11 @@
       path: /etc/sysctl.conf
       line: "{{ packet_forward }}"
 
+  - name: template hosts file
+    template:
+      src: hosts.j2
+      dest: /etc/hosts 
+
   - name: Start to NetworkManager Service
     service:
       name: NetworkManager
