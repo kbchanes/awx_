@@ -64,12 +64,12 @@
     template:
       src: resolv.conf.j2
       dest: /etc/resolv.conf
-
-  - name: Set a hostname
-    hostname:
-      name: "{{ okd['hostname'] }}"
-
+      
   - name: Start to NetworkManager Service
     service:
       name: NetworkManager
       state: restarted
+
+  - name: Set a hostname
+    hostname:
+      name: "{{ okd['hostname'] }}"
