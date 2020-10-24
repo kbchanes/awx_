@@ -2,7 +2,7 @@ bastion:
   network:
     ip: 192.168.0.188
     netmask: 255.255.255.0
-    dns1: 192.168.0.156
+    dns1: 192.168.0.188
     dns2: 8.8.8.8
   hostname: "ns.cccr3.com"
   port: 53
