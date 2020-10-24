@@ -13,11 +13,11 @@
         - NetworkManager
         - firewalld
       state: present
+#   - name: okd set_fact
+#     set_fact:
+#       okd_ip: "{{ ansible_eth0.ipv4.address }}"
+#       okd_fqdn: "{{ ansible_nodename }}"
 
-  - name: okd set_fact
-    set_fact:
-      okd_ip: "{{ ansible_eth0.ipv4.address }}"
-      okd_fqdn: "{{ ansible_nodename }}"
 #   - name: delegate_to
 #     setup:
 #     delegate_to: bastion
