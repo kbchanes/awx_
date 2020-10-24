@@ -18,10 +18,6 @@
   - name: Set a hostname
     hostname:
       name: "{{ bastion['hostname'] }}"
-    
-  - name: Bastion IP in variable
-    set_fact:
-      bastion_ip: "{{ ansible_eth0['ipv4']['address'] }}"
 #   - name: OKD delegate
 #     setup:
 #     delegate_to: okd
@@ -57,7 +53,7 @@
 #       - NETMASK={{ ansible_eth0['ipv4']['netmask'] }}
 #       - GATEWAY={{ ansible_default_ipv4['gateway'] }}
       - DNS1={{ bastion['network']['dns1'] }}
-#       - DNS2={{ bastion['network']['dns2'] }}
+      - DNS2={{ bastion['network']['dns2'] }}
      # backrefs: yes
   
   - name: Packet forwarding
@@ -109,4 +105,3 @@
     service:
       name: NetworkManager
       state: restarted
- 
