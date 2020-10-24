@@ -14,6 +14,9 @@
 #     set_fact:
 #       okd_ip: "{{ ansible_eth0.ipv4.address }}"
 #       okd_fqdn: "{{ ansible_nodename }}"
+  - name: ssh-key hostname
+    command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no {{ okd['hostname'] }}
+  
   
   - name: openshift-release install
     yum:
