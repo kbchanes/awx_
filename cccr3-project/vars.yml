@@ -2,7 +2,6 @@ bastion:
   network:
     ip: 192.168.0.156
     netmask: 255.255.255.255
-    gateway: 192.168.0.1
     dns1: 192.168.0.156
     dns2: 8.8.8.8
   hostname: ns.cccr3.com
@@ -12,8 +11,7 @@ okd:
   network:
     ip: 10.178.0.2
     netmask: 255.255.255.255
-    gateway: 10.178.0.1
-    dns1: 192.168.0.156
+    dns1: "{{ bastion['network']['ip'] }}"
     dns2: 8.8.8.8
   hostname: okd.cccr3.com
   
