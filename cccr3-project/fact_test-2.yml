@@ -36,20 +36,20 @@
       src: hosts.j2
       dest: /etc/hosts 
 
-  - name: Static IP setting
-    lineinfile:
-      path: /etc/sysconfig/network-scripts/ifcfg-eth0
-      regexp: "^BOOTPROTO="
-      line: BOOTPROTO={{ type }}
+#   - name: Static IP setting
+#     lineinfile:
+#       path: /etc/sysconfig/network-scripts/ifcfg-eth0
+#       regexp: "^BOOTPROTO="
+#       line: BOOTPROTO={{ type }}
       
   - name: Static IP setting
     lineinfile:
       path: /etc/sysconfig/network-scripts/ifcfg-eth0
       line: "{{ item }}"
     with_items:
-      - IPADDR={{ okd['network']['ip'] }}
-      - NETMASK={{ okd['network']['netmask'] }}
-      - GATEWAY={{ ansible_default_ipv4['gateway'] }}
+#       - IPADDR={{ okd['network']['ip'] }}
+#       - NETMASK={{ okd['network']['netmask'] }}
+#       - GATEWAY={{ ansible_default_ipv4['gateway'] }}
       - DNS1={{ okd['network']['dns1'] }}
       - DNS2={{ okd['network']['dns2'] }}
       - NM_CONTROLLED=yes
