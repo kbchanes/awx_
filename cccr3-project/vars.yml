@@ -17,3 +17,11 @@ okd:
   
 type: static
 packet_forward: "net.ipv4.ip_forward=1"
+
+local:
+  ipv4: 
+    ip: "127.0.0.1"
+    domain: "localhost localhost.localdomain localhost4 localhost4.localdomain4"
+  ipv6:
+    ip: "::1"
+    domain: "localhost localhost.localdomain localhost6 localhost6.localdomain6"
