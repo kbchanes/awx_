@@ -36,11 +36,6 @@
       src: hosts.j2
       dest: /etc/hosts 
 
-  - name: Start to NetworkManager Service
-    service:
-      name: NetworkManager
-      state: restarted
-
   - name: Static IP setting
     lineinfile:
       path: /etc/sysconfig/network-scripts/ifcfg-eth0
@@ -69,3 +64,8 @@
     template:
       src: resolv.conf.j2
       dest: /etc/resolv.conf
+
+  - name: Start to NetworkManager Service
+    service:
+      name: NetworkManager
+      state: restarted
