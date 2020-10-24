@@ -10,7 +10,7 @@
     command: oc new-project test
     
   - name: Insert docker image
-    command: oc new-app --docker-image= docker.io/nodejs-mongodb-example -n test
+    command: oc new-app --docker-image= nodejs-mongodb-example -n test
     
   - name: Create network
     command: oc expose svc/nodejs-mongodb-example -n test
