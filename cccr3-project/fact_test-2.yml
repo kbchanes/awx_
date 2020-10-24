@@ -26,10 +26,6 @@
 #       bastion_ip: "{{ ansible_eth0.ipv4.address }}"
 #       bastion_fqdn: "{{ ansible_nodename }}"
 
-  - name: Set a hostname
-    hostname:
-      name: "{{ okd['hostname'] }}"
-
   - name: Add sysctl.conf
     lineinfile:
       path: /etc/sysctl.conf
@@ -68,6 +64,10 @@
     template:
       src: resolv.conf.j2
       dest: /etc/resolv.conf
+
+  - name: Set a hostname
+    hostname:
+      name: "{{ okd['hostname'] }}"
 
   - name: Start to NetworkManager Service
     service:
