@@ -25,6 +25,9 @@
 #     set_fact:
 #       bastion_ip: "{{ ansible_eth0.ipv4.address }}"
 #       bastion_fqdn: "{{ ansible_nodename }}"
+  - name: Set a hostname
+    hostname:
+      name: "{{ okd['hostname'] }}"
 
   - name: Add sysctl.conf
     lineinfile:
