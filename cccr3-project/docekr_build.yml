@@ -9,10 +9,7 @@
      password: cccr3team
      
   - name: Docker tag  
-    command:
-      cmd: docker tag docker-registry.defaults.svc:5000/test3/nodejs-mongodb-example cccr3team/nodejs-mongodb-example
+    command: docker tag docker-registry.defaults.svc:5000/test3/nodejs-mongodb-example cccr3team/nodejs-mongodb-example
       
   - name: Docker push
-    docker_image:
-      name: cccr3team/nodejs-mongodb-example
-      push: yes
+    command: docker push cccr3team/nodejs-mongodb-example
