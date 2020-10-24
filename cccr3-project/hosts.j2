@@ -1,4 +1,5 @@
-127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
-::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+{{ local['ipv4']['ip'] }}  {{ local['ipv4']['domain'] }}
+{{ local['ipv6']['ip'] }}  {{ local['ipv6']['domain'] }}
+
 {{ bastion['network']['ip'] }} {{ bastion['hostname'] }}
 {{ okd['network']['ip'] }} {{ okd['hostname'] }}
