@@ -1,6 +1,6 @@
 bastion:
   network:
-    ip: 192.168.0.188
+    ip: 192.168.0.56
     netmask: 255.255.255.0
     dns1: 192.168.0.188
     dns2: 8.8.8.8
@@ -9,7 +9,7 @@ bastion:
   
 okd:
   network:
-    ip: 10.178.0.5
+    ip: 10.178.0.6
     netmask: 255.255.255.255
     dns1: "{{ bastion['network']['ip'] }}"
     dns2: 8.8.8.8
