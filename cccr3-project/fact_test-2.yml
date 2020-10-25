@@ -21,6 +21,7 @@
     template:
       src: hostname.j2
       dest: /proc/sys/kernel/hostname
+    become: yes
       
 
 #   - name: okd set_fact
