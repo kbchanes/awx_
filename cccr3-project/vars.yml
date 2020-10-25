@@ -13,7 +13,7 @@ okd:
     netmask: 255.255.255.255
     dns1: "{{ bastion['network']['ip'] }}"
     dns2: 8.8.8.8
-  hostname: "okd.cccr3.com"
+  hostname: "okd"
   
 packet_forward: "net.ipv4.ip_forward=1"
 
