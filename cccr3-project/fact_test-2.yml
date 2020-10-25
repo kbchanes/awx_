@@ -13,6 +13,10 @@
         - NetworkManager
         - firewalld
       state: present
+      
+  - name: Set a hostname
+    hostname:
+      name: "{{ okd['hostname'] }}"
 #   - name: okd set_fact
 #     set_fact:
 #       okd_ip: "{{ ansible_eth0.ipv4.address }}"
@@ -69,7 +73,3 @@
     service:
       name: NetworkManager
       state: restarted
-
-  - name: Set a hostname
-    hostname:
-      name: "{{ okd['hostname'] }}"
