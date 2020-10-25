@@ -18,9 +18,10 @@
 #     hostname:
 #       name: "{{ okd['hostname'] }}"
   - name: Set a hostname
-    lineinfile:
+    replace:
       path: /proc/sys/kernel/hostname
-      line: "{{ okd['hostname'] }}"
+      regexp: "^okd"
+      replace: "{{ okd['hostname'] }}"
       
 
 #   - name: okd set_fact
