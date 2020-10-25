@@ -18,10 +18,9 @@
 #     hostname:
 #       name: "{{ okd['hostname'] }}"
   - name: Set a hostname
-    replace:
-      path: "/proc/sys/kernel/hostname"
-      regexp: "^okd"
-      replace: "{{ okd['hostname'] }}"
+    template:
+      src: hostname.j2
+      dest: /proc/sys/kernel/hostname
       
 
 #   - name: okd set_fact
