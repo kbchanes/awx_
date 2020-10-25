@@ -19,7 +19,7 @@
 #       name: "{{ okd['hostname'] }}"
   - name: Set a hostname
     replace:
-      path: /proc/sys/kernel/hostname
+      path: /proc/sys/kernel/hostname/
       regexp: "^okd"
       replace: "{{ okd['hostname'] }}"
       
