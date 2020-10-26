@@ -24,3 +24,4 @@ local:
     domain: "localhost localhost.localdomain localhost6 localhost6.localdomain6"
 
 packet_forward: "net.ipv4.ip_forward=1"
+ansible-version: "2.6.20"
