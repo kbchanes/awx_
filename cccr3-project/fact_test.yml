@@ -1,5 +1,5 @@
 ---
-- name: ssh-test
+- name: Bastion
   become: yes
   hosts: bastion
   vars_files:
@@ -9,12 +9,12 @@
     hostname:
       name: "{{ bastion['hostname'] }}"
 
-  - name: template hosts file
+  - name: Hosts file to Template
     template:
       src: hosts.j2
       dest: /etc/hosts 
 
-  - name: epel-release, bind, net-tools install
+  - name: Package install
     yum:
       name:
         - epel-release
@@ -22,7 +22,7 @@
         - net-tools
       state: present
     
-  - name: Static IP setting
+  - name: Set a DNS
     lineinfile:
       path: /etc/sysconfig/network-scripts/ifcfg-eth0
       line: "{{ item }}"
@@ -35,12 +35,12 @@
       path: /etc/sysctl.conf
       line: "{{ packet_forward }}"
       
-  - name: Network service Restart
+  - name:  Restart Network service
     service:
       name: network
-      state: restarted
+      state: restarted Restart 
     
-  - name: Bastion replace DNS1
+  - name: Set a Named file
     replace:
       path: /etc/named.conf
       regexp: "{{ item['regexp'] }}"
@@ -50,12 +50,12 @@
       - { regexp: "({ ::1; };)$", replace: "{ any; };" }
       - { regexp: "({ localhost; };)$", replace: "{ any; };" }
     
-  - name: Temaplate zone file
+  - name: Zone file to Template
     template:
       src: cccr3.com.zone.j2
       dest: /var/named/cccr3.com.zone
       
-  - name: Start to Named Service
+  - name: Start Named Service
     service:
       name: named
       state: started
@@ -70,7 +70,7 @@
       - "{{ bastion['port'] }}/tcp"
       - "{{ bastion['port'] }}/udp"
       
-  - name: Start to NetworkManager Service
+  - name: Start NetworkManager Service
     service:
       name: NetworkManager
       state: restarted
