@@ -2,7 +2,7 @@ bastion:
   network:
     ip: 192.168.0.56
     netmask: 255.255.255.0
-    dns1: 192.168.0.188
+    dns1: "{{ bastion['network']['ip'] }}"
     dns2: 8.8.8.8
   hostname: "ns.cccr3.com"
   port: 53
@@ -14,8 +14,6 @@ okd:
     dns1: "{{ bastion['network']['ip'] }}"
     dns2: 8.8.8.8
   hostname: "okd.cccr3.com"
-  
-packet_forward: "net.ipv4.ip_forward=1"
 
 local:
   ipv4: 
@@ -24,3 +22,5 @@ local:
   ipv6:
     ip: "::1"
     domain: "localhost localhost.localdomain localhost6 localhost6.localdomain6"
+
+packet_forward: "net.ipv4.ip_forward=1"
