@@ -5,25 +5,9 @@
   vars_files:
     - vars.yml
   tasks:
-#   - name: ssh-keygen
-#     command : ssh-keygen -q -b 2048 -t rsa -N "" -f ~/.ssh/id_rsa -y
-#     ignore_errors: yes
-#     run_once: true
-    
-#   - name: SSH-KEY Copy3
-#     command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no localhost
-    
-#   - name: ssh-key copy4
-#     command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no root@192.168.122.139
   - name: Set a hostname
     hostname:
       name: "{{ bastion['hostname'] }}"
-#   - name: OKD delegate
-#     setup:
-#     delegate_to: okd
-#   - name: OKD IP in variable
-#     set_fact:
-#       okd_ip: "{{ ansible_eth0['ipv4']['address'] }}"
 
   - name: template hosts file
     template:
@@ -38,24 +22,14 @@
         - net-tools
       state: present
     
-#   - name: Static IP setting
-#     lineinfile:
-#       path: /etc/sysconfig/network-scripts/ifcfg-eth0
-#       regexp: "^BOOTPROTO="
-#       line: BOOTPROTO={{ type }}
-    
   - name: Static IP setting
     lineinfile:
       path: /etc/sysconfig/network-scripts/ifcfg-eth0
       line: "{{ item }}"
     with_items:
-#       - IPADDR={{ bastion_ip }}
-#       - NETMASK={{ ansible_eth0['ipv4']['netmask'] }}
-#       - GATEWAY={{ ansible_default_ipv4['gateway'] }}
       - DNS1={{ bastion['network']['dns1'] }}
       - DNS2={{ bastion['network']['dns2'] }}
-     # backrefs: yes
-  
+
   - name: Packet forwarding
     lineinfile:
       path: /etc/sysctl.conf
@@ -95,11 +69,6 @@
     with_items:
       - "{{ bastion['port'] }}/tcp"
       - "{{ bastion['port'] }}/udp"
-    
-#   - name: Template DNS
-#     template:
-#       src: resolv.conf.j2
-#       dest: /etc/resolv.conf
       
   - name: Start to NetworkManager Service
     service:
