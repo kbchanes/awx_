@@ -4,30 +4,19 @@
   hosts: bastion
   vars_files: vars.yml
   tasks:
-#   - name: SSH-KEY Copy4
-#     command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no okd.cccr3.com
-  
-#   - name: h3
-#     setup:
-#     delegate_to: okd
-#   - name: h4
-#     set_fact:
-#       okd_ip: "{{ ansible_eth0.ipv4.address }}"
-#       okd_fqdn: "{{ ansible_nodename }}"
   - name: ssh-key hostname
     command: sshpass -p toor ssh-copy-id -i /root/.ssh/id_rsa.pub -o StrictHostKeyChecking=no {{ okd['hostname'] }}
   
-  
-  - name: openshift-release install
+  - name: Openshift-release install
     yum:
       name: centos-release-openshift-origin311.noarch
       state: present
       
-  - name: command
+  - name: yum repolist
     command:
       cmd: yum repolist
       
-  - name: openshift-ansible install
+  - name: Openshift-ansible install
     yum:
       name:
         - openshift-ansible
@@ -35,20 +24,17 @@
         - python-pip
       state: present
 
-  - name: pip insatll ansible
+  - name: Pip insatll ansible
     pip:
       name: ansible==2.6.20
 
-  - name: Template ansible install inventory
+  - name: Ansible inventory to Template
     template:
       src: inventory_hosts.j2
       dest: /etc/ansible/hosts
       
-  - name: ansible-playbook deploy1
+  - name: ansible-playbook Prerequisite
     command: ansible-playbook -i /etc/ansible/hosts /usr/share/ansible/openshift-ansible/playbooks/prerequisites.yml
     
-  - name: ansible-playbook deploy2
+  - name: ansible-playbook Deploy
     command: ansible-playbook -i /etc/ansible/hosts /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml
-
-      
-  
