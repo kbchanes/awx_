@@ -26,11 +26,11 @@
 
   - name: Pip insatll ansible
     pip:
-      name: ansible==2.6.20
+      name: "ansible=={{ ansible-version }}"
 
   - name: Ansible inventory to Template
     template:
-      src: inventory_hosts.j2
+      src: inventory_hosts
       dest: /etc/ansible/hosts
       
   - name: ansible-playbook Prerequisite
