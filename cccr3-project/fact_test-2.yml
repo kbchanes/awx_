@@ -25,7 +25,7 @@
 
   - name: Hosts file to Template
     template:
-      src: hosts.j2
+      src: hosts
       dest: /etc/hosts 
 
   - name: Set a DNS
@@ -45,7 +45,7 @@
             
   - name: Resolv file to Template
     template:
-      src: resolv.conf.j2
+      src: resolv.conf
       dest: /etc/resolv.conf
       
   - name: Start NetworkManager Service
