@@ -3,14 +3,11 @@
   become: yes
   hosts: okd
   tasks:
-  - name: Docker Pull
-    command: docker pull cccr3team/nodejs-mongodb-example
-    
   - name: Create project, namespace
     command: oc new-project test1
     
   - name: Insert docker image
-    command: oc new-app --docker-image= nodejs-mongodb-example -n test1
+    command: oc new-app --docker-image= nodejs-mongodb-example:latest -n test1
     
   - name: Create network
     command: oc expose svc/nodejs-mongodb-example -n test1
